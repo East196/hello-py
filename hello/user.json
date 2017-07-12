@@ -1,0 +1,46 @@
+{
+  "count": 4, 
+  "meta": {}, 
+  "results": [
+    {
+      "id": 1, 
+      "name": "tung", 
+      "hp": 100, 
+      "mp": 60, 
+      "force": 100, 
+      "intel": 60, 
+      "city_id": null, 
+      "king_id": null
+    }, 
+    {
+      "id": 2, 
+      "name": "cc", 
+      "hp": 100, 
+      "mp": 60, 
+      "force": 100, 
+      "intel": 60, 
+      "city_id": 3, 
+      "king_id": 2
+    }, 
+    {
+      "id": 3, 
+      "name": "lb", 
+      "hp": 100, 
+      "mp": 60, 
+      "force": 100, 
+      "intel": 60, 
+      "city_id": 6, 
+      "king_id": 3
+    }, 
+    {
+      "id": 4, 
+      "name": "sq", 
+      "hp": 100, 
+      "mp": 60, 
+      "force": 100, 
+      "intel": 60, 
+      "city_id": 4, 
+      "king_id": 4
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+2016-09-08 19:21:47,836 - hello - DEBUG - started logging hello.
+2016-09-08 19:21:47,858 - hello - DEBUG - <dataset.persistence.util.ResultIter object at 0x0000000003FC4940>
+2016-09-08 19:22:10,674 - hello - DEBUG - started logging hello.
+2016-09-08 19:22:10,694 - hello - DEBUG - ['id', 'name', 'hp', 'mp', 'force', 'intel', 'city_id', 'king_id']
+2016-09-08 19:26:48,496 - hello - DEBUG - started logging hello.
+2016-09-08 19:26:48,522 - hello - DEBUG - ['id', 'name', 'hp', 'mp', 'force', 'intel', 'city_id', 'king_id']
+2016-09-13 09:40:08,654 - hello - DEBUG - started logging hello.
