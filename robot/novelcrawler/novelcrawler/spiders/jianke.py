@@ -21,7 +21,7 @@ class JiankeSpider(scrapy.Spider):
     @staticmethod
     def parse_dir_contents(response):
         item = JiankeItem()
-        item['title'] = response.css("div.bookname > h1").extract_first()
+        item['title'] = response.css("div.bookname > h1::text").extract_first()
         item['link'] = response.url
         item['desc'] = response.css("#content").extract_first()
         yield item

@@ -15,3 +15,4 @@ if __name__ == '__main__':
         for d in json_array:
             print d['title']
             fp.write(d['title'] + os.linesep)
+            fp.write(d['desc'] + os.linesep)
