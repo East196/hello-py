@@ -40,18 +40,28 @@ def get_chapter(url):
 
 
 if __name__ == '__main__':
-    url = 'http://www.xxbiquge.com/2_2327/'
+    # url = 'http://www.xxbiquge.com/2_2385/'  # 朱雀记
+    # url = 'http://www.xxbiquge.com/3_3078/'  # 庆余年
+    # url = 'http://www.xxbiquge.com/2_2327/' # 间客
+    # url = 'http://www.xxbiquge.com/0_979/'  # 将夜
+    # url = 'http://www.xxbiquge.com/5_5422/'  # 择天记
+    # url = 'http://www.xxbiquge.com/12_12926/'  # 御天神帝
+    # url = 'http://www.xxbiquge.com/2_2640/'  # 佛本是道
+    url = 'http://www.xxbiquge.com/2_2699/'  # 黑山老妖
+    # url = 'http://www.xxbiquge.com/2_2637/'  # 龙蛇演义
     soup = get_soup(url)
     book_name = soup.select_one("head > meta[property='og:novel:book_name']").get("content")
     author = soup.select_one("head > meta[property='og:novel:author']").get("content")
     category = soup.select_one("head > meta[property='og:novel:category']").get("content")
     description = soup.select_one("head > meta[property='og:description']").get("content")
+
     txt_name = book_name + ".txt"
     with open(txt_name, "a") as fp:
         fp.write(book_name + os.linesep)
         fp.write(author + os.linesep)
         fp.write(category + os.linesep)
         fp.write(description + os.linesep)
+
     for href in soup.select("#list > dl > dd > a"):
         suburl = get_domain(url) + href.get('href')
         chapter, content = get_chapter(suburl)
