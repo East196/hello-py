@@ -7,8 +7,7 @@ from swallows.engine.objects import (
     Container, ProperContainer,
     Item, Weapon, Horror
 )
-
-from novel.swallows.story import MaleCharacter, FemaleCharacter
+from swallows.story.characters import MaleCharacter, FemaleCharacter
 
 # TODO
 

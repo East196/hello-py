@@ -1,23 +1,25 @@
 #!/usr/bin/env python
-
+# -*- coding: utf-8 -*-
 #
 # Example of extending _The Swallows_ world to produce a different story.
 #
 
 import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 from os.path import realpath, dirname, join
 
 # get the ../src/ directory onto the Python module search path
 sys.path.insert(0, join(dirname(realpath(sys.argv[0])), '..', 'src'))
 
 # now we can import the classes we will work with
-from novel.swallows import Publisher
-from novel.swallows.story import MaleCharacter
-from novel.swallows.story import (
+from swallows.engine.events import Publisher
+from swallows.story.characters import MaleCharacter
+from swallows.story.world import (
     alice, bob, house, upstairs_hall,
     revolver, brandy, dead_body
 )
-from novel.swallows import (
+from swallows.engine.objects import (
     ProperContainer, Item, ProperLocation)
 
 # we extend the world of The Swallows by adding a new character.
@@ -43,8 +45,8 @@ upstairs_hall.set_exits(freds_office) # adds to existing (unknown) exits
 
 # we extend the world by adding some Objects
 # "ProperContainer" and "Item" are imported from swallows.engine.objects
-desk = ProperContainer("<*> desk", owner=fred, location=freds_office)
-pencils = Item('box of pencils', location=desk)
+desk = ProperContainer(u"<*> 书桌", owner=fred, location=freds_office)
+pencils = Item(u'铅笔盒', location=desk)
 
 
 ### main ###
