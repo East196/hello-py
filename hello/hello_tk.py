@@ -15,10 +15,15 @@ class Application(Frame):
         self.nameInput.pack()
         self.alertButton = Button(self, text='Hello', command=self.hello)
         self.alertButton.pack()
+        self.text = Text(self)
+        self.text.pack()
 
     def hello(self):
         name = self.nameInput.get() or 'world'
+
+        self.text.insert('end', name)
         tkMessageBox.showinfo('Message', 'Hello, %s' % name)
+
 
 app = Application()
 # 设置窗口标题:
