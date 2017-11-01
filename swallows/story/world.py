@@ -9,25 +9,23 @@ from swallows.engine.objects import (
 )
 from swallows.story.characters import MaleCharacter, FemaleCharacter
 
-# TODO
+# 世界：
+# 更多反应的尸体：
+# -如果他们同意，采取一对一的行动
+# 协议后：
+# 呼叫警察（他们有一个座机？这可能是娱乐性的。
+# 如果他们共享两者之间的一个移动电话）
+# -我要介绍一个新角色…侦探。佑。
+# 试图处理它…他们试图把它拖到…花园吗？
+# 我要添加一个花园。还有铲子。
+# 在地下室一种说不出的东西！（他们没有足够的兴奋吗？
+# 他们的生活吗？）
+# 子弹的左轮手枪
 
-# World:
-# more reacting to the dead body:
-# - if they *agree*, take one of the courses of action
-# after agreement:
-# - calling the police (do they have a landline?  it might be entertaining
-#   if they share one mobile phone between the both of them)
-#   - i'll have to introduce a new character... the detective.  yow.
-# - trying to dispose of it... they try to drag it to... the garden?
-#   i'll have to add a garden.  and a shovel.
-# an unspeakable thing in the basement!  (don't they have enough excitement
-#   in their lives?)
-# bullets for the revolver
-
-### world ###
+# ## world ## #
 # 角色
-alice = FemaleCharacter('店家')
-bob = MaleCharacter('武松')
+alice = FemaleCharacter('爱丽丝')
+bob = MaleCharacter('波波')
 
 # 位置
 kitchen = Location('厨房')
@@ -85,8 +83,7 @@ revolver = Weapon('左轮手枪', location=random.choice([bobs_bed, alices_bed])
 # 吓人的 死尸
 dead_body = Horror('死尸', location=bathroom)
 
-# when making alice and bob, we let them recognize certain important
-# objects in their world
+# 当创建爱丽丝和鲍伯时，我们让他们认识到他们在世界某些重要的对象
 # 默认这两个角色都知道关键事件
 for c in (alice, bob):
     c.configure_objects(

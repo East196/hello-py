@@ -1,20 +1,21 @@
 # coding=utf-8
-#!/usr/bin/env python
+# !/usr/bin/env python
 
+# swallows 信以为真的
 import sys
 from os.path import realpath, dirname, join
 
-# get the ../src/ directory onto the Python module search path
+# 把 ../src/ 文件夹加入python模块搜索路径
 sys.path.insert(0, join(dirname(realpath(sys.argv[0])), '..', 'src'))
 
-# now we can import things, like:
+
 from swallows.engine.events import Publisher
 
 # 在world中构建了整个世界
 from swallows.story.world import alice, bob, house
 
 # 出发点在于人
-### main ###
+# ## 主体 ## #
 publisher = Publisher(
     # 两个人
     characters=(alice, bob),
@@ -32,5 +33,4 @@ publisher = Publisher(
 publisher.publish()
 
 
-# TODO 提取蜀山剑侠传中所有的人名、地名、法宝名
-# TODO 根据上下文判定人物相性、正邪度
+

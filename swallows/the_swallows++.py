@@ -5,6 +5,7 @@
 #
 
 import sys
+
 reload(sys)
 sys.setdefaultencoding('utf8')
 from os.path import realpath, dirname, join
@@ -28,7 +29,7 @@ from swallows.engine.objects import (
 # (you *can* pass other objects here, for example 'revolver=brandy', in which
 # case the character will act fairly nonsensibly, threatening other characters
 # with the bottle of brandy and so forth)
-fred = MaleCharacter('Fred')
+fred = MaleCharacter('弗雷德')
 fred.configure_objects(
     revolver=revolver,
     brandy=brandy,
@@ -38,18 +39,17 @@ fred.configure_objects(
 # we extend the world by adding new locations and objects
 # note that locations exited-to and from must be imported from swallows.story.world (above)
 # "Location" is imported from swallows.engine.objects
-freds_office = ProperLocation("<*> office", owner=fred)
+freds_office = ProperLocation(u"<*> 办公室", owner=fred)
 freds_office.set_exits(upstairs_hall)
 
-upstairs_hall.set_exits(freds_office) # adds to existing (unknown) exits
+upstairs_hall.set_exits(freds_office)  # adds to existing (unknown) exits
 
 # we extend the world by adding some Objects
 # "ProperContainer" and "Item" are imported from swallows.engine.objects
 desk = ProperContainer(u"<*> 书桌", owner=fred, location=freds_office)
 pencils = Item(u'铅笔盒', location=desk)
 
-
-### main ###
+# ## main ## #
 
 publisher = Publisher(
     characters=(
@@ -58,7 +58,7 @@ publisher = Publisher(
         fred,
     ),
     setting=house,
-    title="My _The Swallows_ Fanfic",
-    #debug=True,
+    title="我的飞飞",
+    # debug=True,
 )
 publisher.publish()
