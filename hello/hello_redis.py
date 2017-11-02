@@ -12,9 +12,9 @@ print info
 keys = redis.keys("*")
 print keys
 
-keys = redis.hkeys("vifi:huawei:esn2id")
+keys = redis.hkeys("keys")
 print keys
 print len(keys)
 
-key__value = redis.hget("vifi:huawei:esn2id", '21500101933GEA000405')
+key__value = redis.hget("key", 'hashkey')
 print key__value
