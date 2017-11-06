@@ -22,13 +22,20 @@ root.event_generate("<<Foo>>", when="tail")
 ```
 Note that the event_generate call will return immediately. It's not clear if that's what you want or not. Generally speaking you don't want an event based program to block waiting for a response to a specific event because it will freeze the GUI.
 
+# 窗口透明
+```
+root.attributes("-alpha", 0.4)#窗口透明度60 %
+```
+
 # 窗口总在最前
 Assuming you mean your application windows when you say "my other windows", you can use the lift() method on a Toplevel or Tk:
 
 root.lift()
 If you want the window to stay above all other windows, use:
 
+```
 root.attributes("-topmost", True)
+```
 Where root is your Toplevel or Tk. Don't forget the - infront of "topmost"!
 
 To make it temporary, disable topmost right after:

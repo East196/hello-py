@@ -3,16 +3,20 @@
 
 from Tkinter import *
 
-master = Tk()
+if __name__ == '__main__':
 
-scrollbar = Scrollbar(master)
-scrollbar.pack(side=RIGHT, fill=Y)
+    # 官方有ScrolledText的实现！ from ScrolledText import ScrolledText
+    # 官方没有Listbox的Scrollbar实现！
+    master = Tk()
 
-listbox = Listbox(master, yscrollcommand=scrollbar.set)
-for i in range(1000):
-    listbox.insert(END, str(i))
-listbox.pack(side=LEFT, fill=BOTH)
+    scrollbar = Scrollbar(master)
+    scrollbar.pack(side=RIGHT, fill=Y)
 
-scrollbar.config(command=listbox.yview)
+    listbox = Listbox(master, yscrollcommand=scrollbar.set)
+    for i in range(1000):
+        listbox.insert(END, str(i))
+    listbox.pack(side=LEFT, fill=BOTH)
 
-mainloop()
+    scrollbar.config(command=listbox.yview)
+
+    mainloop()
