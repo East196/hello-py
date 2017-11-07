@@ -21,6 +21,7 @@ class CityRender(object):
 if __name__ == '__main__':
     # print CityRender().rend([])
     # print "3".rjust(5, ' ')
+    print db['hero'].count()
     result = db['hero'].all()
     for row in result:
         print row
