@@ -3,10 +3,11 @@
 import math
 import urllib2
 
+# wxpython
 import wx
 from bs4 import BeautifulSoup
 
-from learnpy.hello_knn import knn_classify
+from hello.hello_ml.hello_knn import knn_classify
 
 
 class MyFrame(wx.Frame):
