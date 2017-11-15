@@ -9,6 +9,8 @@ python setup.py install
 ```
 dll文件在页面上直接下载，我用的:[xgboost.dll](http://ssl.picnet.com.au/xgboost/20171116/x64_gpu/xgboost.dll)
 
+如果想自己编译，请参考：[
+Installing XGBoost For Anaconda on Windows](https://www.ibm.com/developerworks/community/blogs/jfp/entry/Installing_XGBoost_For_Anaconda_on_Windows?lang=en)
 
 # matplotlib backend 问题
 Backend Qt5Agg is interactive backend. Turning interactive mode on.
