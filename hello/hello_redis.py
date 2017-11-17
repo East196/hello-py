@@ -5,7 +5,7 @@ import redis
 
 print redis.__file__
 # 连接，可选不同数据库
-redis = redis.Redis(host='10.40.100.16', port=6379, db=0)
+redis = redis.Redis(host='localhost', port=6379, db=0)
 
 info = redis.info()
 print info
