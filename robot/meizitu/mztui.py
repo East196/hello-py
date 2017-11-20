@@ -22,8 +22,8 @@ def create_gif(image_list, gif_name):
 from appJar import gui
 
 app = gui()
-root_path = u"e:/mzitu"
-gif_path = u"e:/mzitugif"
+root_path = u"e:/backup/mzitu"
+gif_path = u"e:/backup/mzitugif"
 
 
 def func(btn):
@@ -107,5 +107,6 @@ def to_gif():
 
 if __name__ == '__main__':
     if not os.path.exists(gif_path):
+        os.mkdir(gif_path)
         to_gif()
     start()
