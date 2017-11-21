@@ -6,24 +6,12 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 import os
-import imageio
-
-
-def create_gif(image_list, gif_name):
-    frames = []
-    for image_name in image_list:
-        frames.append(imageio.imread(image_name))
-
-    # Save them as frames into a gif
-    imageio.mimsave(gif_name, frames, 'GIF', duration=0.1)
-    return
-
 
 from appJar import gui
 
 app = gui()
-root_path = u"e:/backup/mzitu"
-gif_path = u"e:/backup/mzitugif"
+root_path = u"e:/backup/Downloads/mzitu"
+gif_path = u"e:/backup/Downloads/mzitugif"
 
 
 def func(btn):
@@ -62,7 +50,6 @@ def start():
 
 def to_gif():
     from PIL import Image
-    from images2gif import writeGif
 
     dirs = os.listdir(root_path)
     for dir in dirs:
@@ -83,6 +70,7 @@ def to_gif():
         for img in iml:
             half_the_width = img.size[0] / 2
             half_the_height = img.size[1] / 2
+            # 获得最大的正方形
             min_size = min(half_the_width, half_the_height)
             img4 = img.crop(
                 (
@@ -92,10 +80,11 @@ def to_gif():
                     half_the_height + min_size
                 )
             )
-
+            # 缩放
             img4.thumbnail((250, 250))
             print img4.size
             niml.append(img4)
+        # TODO 根据长宽和颜色对niml分割
 
         gifd = root_path + 'gif/'
         gif_name = gifd + dir + ".gif"
@@ -107,6 +96,6 @@ def to_gif():
 
 if __name__ == '__main__':
     if not os.path.exists(gif_path):
-        os.mkdir(gif_path)
+        os.makedirs(gif_path)
         to_gif()
     start()

@@ -23,7 +23,7 @@ class mzitu():
             title = a.get_text()
             print(u'开始保存：', title)  ##加点提示不然太枯燥了
             path = title.replace(u"?", u'_').replace(u":", u'_')  ##我注意到有个标题带有 ？  这个符号Windows系统是不能创建文件夹的所以要替换掉
-            time.sleep(random.randrange(50, 200) / 200.0)
+            time.sleep(random.randrange(50, 200) / 4000.0)
             self.mkdir(path)  ##调用mkdir函数创建文件夹！这儿path代表的是标题title哦！！！！！不要糊涂了哦！
             href = a['href']
             print href
@@ -37,6 +37,7 @@ class mzitu():
         if int(max_span) > len(os.listdir(os.path.curdir)):
             for page in range(1, int(max_span) + 1):
                 page_url = href + '/' + str(page)
+                time.sleep(random.randrange(50, 200) / 4000.0)
                 self.img(page_url)  ##调用img函数
 
     def img(self, page_url):  ##这个函数处理图片页面地址获得图片的实际地址
@@ -55,7 +56,7 @@ class mzitu():
 
     def mkdir(self, path):  ##这个函数创建文件夹
         path = path.strip()
-        base = "E:/backup/mzitu"
+        base = "E:/backup/Downloads/mzitu"
         isExists = os.path.exists(os.path.join(base, path))
         if not isExists:
             print u'建了一个名字叫做', path, u'的文件夹！'
@@ -71,11 +72,16 @@ class mzitu():
         content = requests.get(url, headers=self.headers)
         return content
 
+
 if __name__ == '__main__':
     def crawl():
         try:
             Mzitu = mzitu()  ##实例化
             Mzitu.all_url('http://www.mzitu.com/all')  ##给函数all_url传入参数  你可以当作启动爬虫（就是入口）
         except:
-            time.sleep(random.randrange(50,500)/100.0)
+            print "sleep hahaha and restart"
+            # TODO 根据异常状态调整3处的sleep
+            time.sleep(random.randrange(50, 500) / 100.0)
             crawl()
+    crawl()
+    # 颜：杨晨晨 李凌子
