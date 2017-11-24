@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 import sys
 
+from images2gif import writeGif
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -58,9 +60,9 @@ def to_gif():
         min_x, min_y = 0, 0
         iml = []
         for key in pics:
-            print key
+            # print key
             img = Image.open(key)
-            print img
+            # print img
             iml.append(img)
             x, y = img.size
             min_x = min(x, min_x)
@@ -82,13 +84,16 @@ def to_gif():
             )
             # 缩放
             img4.thumbnail((250, 250))
-            print img4.size
+            # print img4.size
             niml.append(img4)
         # TODO 根据长宽和颜色对niml分割
 
         gifd = root_path + 'gif/'
         gif_name = gifd + dir + ".gif"
-        print niml
+        for nim in niml:
+            nim.info["duration"] = 200
+        print niml[0].info
+        # writeGif(gif_name, niml)
         niml[0].save(gif_name, save_all=True, append_images=niml[1:])
         # imageio.mimsave(gif_name, niml, 'GIF', duration=0.1)
         # create_gif(pics, gif_name)
@@ -97,5 +102,5 @@ def to_gif():
 if __name__ == '__main__':
     if not os.path.exists(gif_path):
         os.makedirs(gif_path)
-        to_gif()
+    to_gif()
     start()

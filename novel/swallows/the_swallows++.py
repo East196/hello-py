@@ -14,13 +14,13 @@ from os.path import realpath, dirname, join
 sys.path.insert(0, join(dirname(realpath(sys.argv[0])), '..', 'src'))
 
 # now we can import the classes we will work with
-from swallows.engine.events import Publisher
-from swallows.story.characters import MaleCharacter
-from swallows.story.world import (
+from novel.swallows import Publisher
+from novel.swallows import MaleCharacter
+from novel.swallows import (
     alice, bob, house, upstairs_hall,
     revolver, brandy, dead_body
 )
-from swallows.engine.objects import (
+from novel.swallows import (
     ProperContainer, Item, ProperLocation)
 
 # we extend the world of The Swallows by adding a new character.

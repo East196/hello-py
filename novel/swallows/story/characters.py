@@ -2,7 +2,7 @@
 
 import random
 
-from swallows.engine.objects import (
+from novel.swallows import (
     Animate, ProperMixin, MasculineMixin, FeminineMixin,
     Topic,
     GreetTopic, SpeechTopic, QuestionTopic,

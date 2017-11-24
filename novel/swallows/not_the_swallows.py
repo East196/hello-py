@@ -19,8 +19,8 @@ from os.path import realpath, dirname, join
 sys.path.insert(0, join(dirname(realpath(sys.argv[0])), '..', 'src'))
 
 # now we can:
-from swallows.engine.events import Publisher
-from swallows.engine.objects import Location, ProperLocation, Male
+from novel.swallows import Publisher
+from novel.swallows import Location, ProperLocation, Male
 
 ### world ###
 

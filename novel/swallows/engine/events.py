@@ -321,7 +321,7 @@ class MadeTheirWayToTransformer(Transformer):
 
 
 # well well well
-from swallows.engine.objects import Actor
+from novel.swallows import Actor
 
 weather = Actor('天气')
 

@@ -1,7 +1,7 @@
 # coding=utf-8
 import random
 
-from swallows.engine.events import Event
+from novel.swallows import Event
 
 
 # ## TOPICS主题 ## #

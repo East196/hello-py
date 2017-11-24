@@ -2,12 +2,12 @@
 
 import random
 
-from swallows.engine.objects import (
+from novel.swallows import (
     Location, ProperLocation, Treasure, PluralTreasure,
     Container, ProperContainer,
     Item, Weapon, Horror
 )
-from swallows.story.characters import MaleCharacter, FemaleCharacter
+from novel.swallows import MaleCharacter, FemaleCharacter
 
 # 世界：
 # 更多反应的尸体：
