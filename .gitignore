@@ -1,6 +1,7 @@
 **/*.pyc
 **/*.conf
 **/*.pem
+**/*.txt
 **/.cache
 .idea
 LICENSE
