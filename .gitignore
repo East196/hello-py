@@ -3,5 +3,5 @@
 **/*.pem
 **/*.txt
 **/.cache
-.idea
+.idea/**
 LICENSE
