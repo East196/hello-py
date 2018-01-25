@@ -19,9 +19,23 @@ def download(url):
     return urllib2.urlopen(url).read()
 
 
+class Download():
+    def __init__(self):
+        pass
+
+    def do(self, url):
+        return urllib2.urlopen(url).read()
+
+
 if __name__ == '__main__':
     urls = ['http://httpbin.org/get'] * 100
     pool = Pool(20)
-    results = pool.map(download, urls)
+    d = Download()
+
+    aresults = pool.map_async(d.do, urls)
+    print aresults
+
+    results = pool.map(d.do, urls)
     print len(results)
-    print results
+    print "===", results
+    print "========", aresults.get()
