@@ -30,6 +30,7 @@ def show(listbox):
 
 def change_ren(listbox):
     print listbox
+    print app.getListItems("列表")
     pic = app.getListItems("列表")[0]
     app.reloadImage("clickme", pic)
 
@@ -37,14 +38,15 @@ def change_ren(listbox):
 def start():
     global pics
     pics = [gif_path + "/" + pic for pic in os.listdir(gif_path)]
+    print pics
 
     app.addLabelEntry("关键词")
     app.addButton("搜索", func)
     app.enableEnter(func)
 
     app.addListBox("列表", [])
-    app.setListBoxChangeFunction("列表", change_ren)
     func("列表")
+    app.setListBoxChangeFunction("列表", change_ren)
 
     app.addImage("clickme", pics[0])
     app.go()
@@ -52,6 +54,7 @@ def start():
 
 def to_gif():
     from PIL import Image
+    # http://blog.csdn.net/yangalbert/article/details/7603338
 
     dirs = os.listdir(root_path)
     for dir in dirs:
@@ -102,5 +105,5 @@ def to_gif():
 if __name__ == '__main__':
     if not os.path.exists(gif_path):
         os.makedirs(gif_path)
-    to_gif()
+    # to_gif()
     start()
