@@ -51,7 +51,6 @@ def start():
     app.addImage("clickme", pics[0])
     app.go()
 
-
 def to_gif():
     from PIL import Image
     # http://blog.csdn.net/yangalbert/article/details/7603338

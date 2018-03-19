@@ -2,6 +2,7 @@
 **/*.conf
 **/*.pem
 **/*.txt
+**/*.xls
 **/.cache
 .idea/**
 LICENSE
