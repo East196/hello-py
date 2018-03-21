@@ -20,6 +20,9 @@ app.logger.debug("loggggggggggg")
 > pip install flask-restful
 
 Todo & TodoList
+## 豆瓣pip
+sudo easy_install -i http://pypi.douban.com/simple/ saltTesting
+sudo pip install -i http://pypi.douban.com/simple/ saltTesting
 
 
 ## pymongo使用
@@ -191,4 +194,3 @@ app.run(debug=True, port=8100, ssl_context='adhoc')
 ## flask debug toolbar
 显示的条件是返回页面要有<body></body>
 logging需要使用python原生logging
-
