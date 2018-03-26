@@ -7,32 +7,32 @@ import random
 from selenium import webdriver
 import time
 
+from fastlist import get_article_ids
+
 
 def view(browser, blog):
     browser.maximize_window()
     browser.get(blog)
     time.sleep(5)
 
-    urls = []
-    html_as = browser.find_elements_by_css_selector("li.blog-unit a")
-    for html_a in html_as:
-        urls.append(html_a.get_attribute("href"))
+    articles = ['{}/article/list/{}'.format(blog, article_id) for article_id in get_article_ids(blog)]
 
-    print urls
-
-    for html in urls:
+    for html in articles:
         try:
             browser.get(html)
-            time.sleep(random.randint(3, 5))
+            s = random.randint(3, 5)
+            print(s)
+            time.sleep(s)
         except Exception, e:
             print e
 
 
-browsers = [webdriver.Firefox(), webdriver.PhantomJS()]
-# browsers = [webdriver.Ie()]
 blogs = ["https://blog.csdn.net/q809198545", "http://blog.csdn.net/east196"]
 
-for browser in browsers:
+browser = webdriver.PhantomJS()
+while True:
+
     for blog in blogs:
         view(browser, blog)
-    browser.close()
+
+browser.close()
