@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 
+import random
 import sys
 import urlparse
 
@@ -103,17 +104,24 @@ class DouYin(object):
         print(r.content)
         music_json = json.loads(re.findall("var data = (.*);", r.content)[0])[0]
 
-        # uid = music_json["author"]['uid']
+        uid = music_json["author"]['uid']
         video_url = music_json["video"]["play_addr"]["url_list"][0]
 
-        self.vedio_download("abc.mp4", video_url)
+        self.vedio_download(str(video_id) + ".mp4", video_url)
 
     def get_video_ids(self, uid):
-        return []
+        user_url = "https://www.douyin.com/aweme/v1/aweme/post/?user_id={uid}&count=21&max_cursor=0&aid=1128".format(uid=uid)
+        print(user_url)
+        r = requests.get(user_url, headers=headers, verify=False)
+        print(r.json()["aweme_list"][0])
+
+        return [aweme["aweme_id"] for aweme in r.json()["aweme_list"]]
 
     def by_uid(self, uid):
         video_ids = self.get_video_ids(uid)
         for video_id in video_ids:
+            print(video_id)
+            time.sleep(random.randint(3, 8))
             self.by_video_id(video_id)
 
 
@@ -136,20 +144,11 @@ def get_domain(url):
 
 if __name__ == '__main__':
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'
-    headers = {'User-Agent': user_agent
-               # ,
-               #        "Host": "www.douyin.com",
-               #        "Upgrade-Insecure-Requests": "1",
-               #        "Pragma": "no-cache",
-               #        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-               #        "Accept-Encoding": "gzip, deflate, br",
-               #        "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
-               #        "Cookie": "_ba=BA0.2-20180322-5199e-6bUkCYyrKIsORbSiyOXx; _ga=GA1.2.1392020217.1521706064; tt_webid=6535690985748366855; _gid=GA1.2.1233003631.1522756594"
+    headers = {'User-Agent': user_agent}
 
-               }
     douyin = DouYin()
-    user_id = r'aadou'
-    video_id = "6517594971044842756"
-    ##
-    # douyin.by_user_id(nickname)
-    douyin.by_video_id(video_id)
+    uid = '81762680084'
+    douyin.by_uid(uid)
+
+    # video_id = "6517594971044842756"
+    # douyin.by_video_id(video_id)
