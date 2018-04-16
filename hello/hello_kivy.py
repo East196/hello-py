@@ -4,6 +4,7 @@
 # from kivy.app import App
 # from kivy.uix.label import Label
 
+## pip install docutils pygments pypiwin32 kivy.deps.sdl2 kivy.deps.glew
 
 from kivy.app import App
 from kivy.lang import Builder
@@ -40,4 +41,14 @@ class TestApp(App):
         return OneScreen()
 
 
-TestApp().run()
+from kivy.app import App
+from kivy.uix.button import Button
+
+
+class TestApp2(App):
+    def build(self):
+        return Button(text='Hello World')
+
+
+if __name__ == '__main__':
+    TestApp2().run()

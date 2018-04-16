@@ -6,5 +6,7 @@
 **/*.txt
 **/*.xls
 **/.cache
+**/.cache
+**/*.mp4
 .idea/**
 LICENSE
