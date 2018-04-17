@@ -35,7 +35,7 @@ def get_article_ids(blog):
     try:
         page_num = get_page_num(blog)
 
-        for page in range(1, int(page_num) + 1):
+        for page in range(1, int(page_num) + 2):
             url = blog + "/article/list/" + str(page)
             print url
             resp = requests.get(url, timeout=TIME_OUT, headers=req_headers)
@@ -108,7 +108,7 @@ def get_useful_ips(ips, batch=10):
 if __name__ == '__main__':
     # blog = "http://blog.csdn.net/east196"
     # print get_article_ids(blog)
-    article_link = "https://blog.csdn.net/east196/article/details/79632539"
+    article_link = "https://blog.csdn.net/east196/article/details/79787898"
     while True:
         try:
             requests.get(article_link, timeout=TIME_OUT, headers=req_headers)

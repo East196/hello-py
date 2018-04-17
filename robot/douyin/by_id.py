@@ -30,6 +30,8 @@ class DouYin(object):
         print(sys.getdefaultencoding())
         print(u"抖音下载!")
         # urllib3连接错误时抛出exceptions.SSLError
+        user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'
+        self.headers = {'User-Agent': user_agent}
         self.http = urllib3.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
 
     # 获得总分享视频url地址，返回视频名字，视频数，分享视频链接列表
@@ -49,7 +51,7 @@ class DouYin(object):
                 user_id = each['user_info']['uid']
         user_url = 'https://aweme.snssdk.com/aweme/v1/aweme/post/?iid=15735436175&device_id=37063549497&os_api=18&app_name=aweme&channel=App%20Store&idfa=08621BB7-65C3-454D-908A-D02F565D85F1&device_platform=iphone&build_number=15805&vid=6BD753D7-C89A-4BEF-9C3D-7192E26CF330&openudid=ee5f41b63ff4704166b2f2d8920267fcd109136b&device_type=iPhone6,2&app_version=1.5.8&version_code=1.5.8&os_version=11.0.3&screen_width=640&aid=1128&ac=WIFI&count={0}&max_cursor=0&min_cursor=0&user_id={1}&cp=e7329b5ccceae5cbe1&as=a125ee5e8cd3393c4e&ts={2}'.format(
             aweme_count, user_id, int(time.time()))
-        r = self.http.request('GET', user_url, headers=header)
+        r = self.http.request('GET', user_url, headers=self.headers)
         htm = json.loads(r.data.decode('utf-8'))
         for each in htm['aweme_list']:
             share_desc = each['share_info']['share_desc']
@@ -73,12 +75,15 @@ class DouYin(object):
         # 下载视频
 
     def vedio_download(self, video_name, video_url):
+        if os.path.exists(video_name):
+            print("downloaded! {video_name} by {video_url}".format(video_name=video_name, video_url=video_url))
+            return
         size = 0
         with closing(self.http.request('GET', video_url, preload_content=False)) as response:
             chunk_size = 1024
             content_size = int(response.headers['content-length'])
             if response.status == 200:
-                print('[文件大小]：%0.2f MB' % (content_size / chunk_size / 1024))
+                print('[文件大小]：%0.2f MB' % (content_size / chunk_size / 1024.0))
                 with open(video_name, 'wb') as file:
                     for data in response.stream(chunk_size):
                         file.write(data)
@@ -100,20 +105,29 @@ class DouYin(object):
     def by_video_id(self, video_id):
         video_summary_url = "https://www.douyin.com/share/video/{video_id}/".format(video_id=video_id)
         print(video_summary_url)
-        r = requests.get(video_summary_url, headers=headers, verify=False)
-        print(r.content)
+        r = requests.get(video_summary_url, headers=self.headers)#, verify=False)
+        # print(r.content)
+
         music_json = json.loads(re.findall("var data = (.*);", r.content)[0])[0]
 
-        uid = music_json["author"]['uid']
-        video_url = music_json["video"]["play_addr"]["url_list"][0]
-
-        self.vedio_download(str(video_id) + ".mp4", video_url)
+        try:
+            uid = music_json["author"]['uid']
+            video_url = music_json["video"]["play_addr"]["url_list"][0]
+            print(video_url)
+            dirtory = "mp4/{uid}/".format(uid=uid)
+            if not os.path.exists(dirtory):
+                print("no dirtory {dirtory}, mking it".format(dirtory=dirtory))
+                os.mkdir(dirtory)
+            self.vedio_download("mp4/{uid}/{video_id}.mp4".format(uid=uid, video_id=video_id), video_url)
+        except:
+            print("erorr!")
+            print(music_json)
 
     def get_video_ids(self, uid):
         user_url = "https://www.douyin.com/aweme/v1/aweme/post/?user_id={uid}&count=21&max_cursor=0&aid=1128".format(uid=uid)
         print(user_url)
-        r = requests.get(user_url, headers=headers, verify=False)
-        print(r.json()["aweme_list"][0])
+        r = requests.get(user_url, headers=self.headers, verify=False)
+        # print(r.json()["aweme_list"][0])
 
         return [aweme["aweme_id"] for aweme in r.json()["aweme_list"]]
 
@@ -125,27 +139,7 @@ class DouYin(object):
             self.by_video_id(video_id)
 
 
-def get_soup(url):
-    r = requests.get(url, headers)
-    soup = BeautifulSoup(r.content, "lxml")
-    return soup
-
-
-def get_json(url):
-    r = requests.get(url, headers)
-    return r.json()
-
-
-def get_domain(url):
-    split = urlparse.urlsplit(url)
-    domain = "{scheme}://{netloc}".format(scheme=split.scheme, netloc=split.netloc)
-    return domain
-
-
 if __name__ == '__main__':
-    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'
-    headers = {'User-Agent': user_agent}
-
     douyin = DouYin()
     uid = '81762680084'
     douyin.by_uid(uid)

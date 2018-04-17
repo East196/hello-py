@@ -15,24 +15,20 @@ def view(browser, blog):
     browser.get(blog)
     time.sleep(5)
 
-    articles = ['{}/article/list/{}'.format(blog, article_id) for article_id in get_article_ids(blog)]
-
-    for html in articles:
+    for html in articles[29:]:
         try:
             browser.get(html)
             s = random.randint(3, 5)
-            print(s)
+            print(s, html)
             time.sleep(s)
         except Exception, e:
             print e
 
 
-blogs = ["https://blog.csdn.net/q809198545", "http://blog.csdn.net/east196"]
-
+blog = "http://blog.csdn.net/east196"  # "https://blog.csdn.net/q809198545",
+articles = ['{}/article/list/{}'.format(blog, article_id) for article_id in get_article_ids(blog)]
 browser = webdriver.PhantomJS()
 while True:
-
-    for blog in blogs:
-        view(browser, blog)
+    view(browser, blog)
 
 browser.close()
