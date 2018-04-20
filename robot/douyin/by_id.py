@@ -33,6 +33,7 @@ class DouYin(object):
         user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'
         self.headers = {'User-Agent': user_agent}
         self.http = urllib3.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
+        urllib3.disable_warnings()
 
     # 获得总分享视频url地址，返回视频名字，视频数，分享视频链接列表
     def get_video_url(self, nickname):
