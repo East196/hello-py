@@ -67,3 +67,5 @@ if __name__ == '__main__':
     frame = MyFrame()
     frame.Show(True)
     app.MainLoop()
+
+# 真实地铁官网会有数据
