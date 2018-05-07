@@ -1,0 +1,1 @@
+share user -> video id -> video html -> video url

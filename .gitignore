@@ -8,8 +8,9 @@
 **/*.txt
 **/*.xls
 **/.cache
-**/.cache
+**/cache/*
 **/*.mp4
+**/mp4/**
 .idea/**
 douyin/**
 LICENSE

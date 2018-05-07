@@ -4,7 +4,8 @@ from __future__ import print_function
 
 import random
 import sys
-import urllib.parse as urlparse
+from urllib.parse import urlparse
+from urllib.parse import quote
 
 import requests
 from bs4 import BeautifulSoup
@@ -14,7 +15,7 @@ import os
 import re
 
 from contextlib import closing
-from urllib import quote
+
 
 import time
 
