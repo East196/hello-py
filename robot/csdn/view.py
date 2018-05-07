@@ -21,8 +21,8 @@ def view(browser, blog):
             s = random.randint(3, 5)
             print(s, html)
             time.sleep(s)
-        except Exception, e:
-            print e
+        except Exception as  e:
+            print(e)
 
 
 blog = "http://blog.csdn.net/east196"  # "https://blog.csdn.net/q809198545",

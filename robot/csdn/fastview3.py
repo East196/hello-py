@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from fastlist import *
+from .fastlist import *
 
 
 def auto_click(articles, proxies=[]):

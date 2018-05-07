@@ -36,3 +36,11 @@ nbviewer:`https://nbviewer.jupyter.org/`
 github/用户名/项目名:`github/shikanon/MyPresentations/`
 
 路径：`blob/master/DeepLearning/LearnOfDeepLearning.ipynb`
+
+## time
+https://blog.csdn.net/p9bl5bxp/article/details/54945920
+
+
+## test
+可以考虑用tdd方式写通用工具库
+力挺py.test

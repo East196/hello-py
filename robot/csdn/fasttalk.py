@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*
-import ConfigParser
+import configparser
 import random
 
 import requests
 import time
 from bs4 import BeautifulSoup
 
-from fastlist import get_article_ids
+from .fastlist import get_article_ids
 
 
 def login():
-    config = ConfigParser.ConfigParser()
+    config = configparser.ConfigParser()
     config.read("csdn.conf")
 
     u = config.get("east", "username")

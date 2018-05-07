@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 
 # coding=utf-8
-import ConfigParser
+import configparser
 import random
 
 from selenium import webdriver
 import time
 
-config = ConfigParser.ConfigParser()
+config = configparser.ConfigParser()
 config.read("csdn.conf")
 
 u = config.get("east", "username")
@@ -41,15 +41,15 @@ def view(browser, blog):
     for html_a in html_as:
         urls.append(html_a.get_attribute("href"))
 
-    print urls
+    print(urls)
 
     for url in urls:
         try:
             if url.decode("utf-8").startswith("http"):
                 browser.get(url)
                 time.sleep(random.randint(1, 3))
-        except Exception, e:
-            print e
+        except Exception as e:
+            print(e)
 
 
 blogs = ["http://blog.csdn.net/q809198545", "http://blog.csdn.net/east196"]

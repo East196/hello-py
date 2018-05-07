@@ -37,12 +37,12 @@ def get_article_ids(blog):
 
         for page in range(1, int(page_num) + 2):
             url = blog + "/article/list/" + str(page)
-            print url
+            print(url)
             resp = requests.get(url, timeout=TIME_OUT, headers=req_headers)
             soup = BeautifulSoup(resp.text, "lxml")
             article_as = soup.select("li.blog-unit a")
             article_ids += [article_a.get("href").split("details/")[1] for article_a in article_as]
-            print len(article_ids), article_ids
+            print(len(article_ids), article_ids)
     except:
         pass
 
@@ -64,7 +64,7 @@ def get_proxy(page=10):
             time.sleep(12)
     except:
         pass
-    print u"爬取%s代理IP" % len(proxies)
+    print(u"爬取%s代理IP" % len(proxies))
     return proxies
 
 
@@ -85,10 +85,10 @@ def is_useful(ip):
         resp = requests.get("http://ip.chinaz.com/", headers=req_headers, timeout=TIME_OUT, proxies=ip2proxy(ip))
         html = BeautifulSoup(resp.text, 'lxml')
         print(html.select_one(".getlist"))
-        print u"%s有效" % ip
+        print(u"%s有效" % ip)
         return True
     except:
-        print u"%s无效" % ip
+        print(u"%s无效" % ip)
         return False
 
 
@@ -112,10 +112,10 @@ if __name__ == '__main__':
     while True:
         try:
             requests.get(article_link, timeout=TIME_OUT, headers=req_headers)
-            print article_link
+            print(article_link)
         except:
-            print "error"
+            print("error")
 
         s = random.randint(12, 60)
-        print "sleep: {}s".format(s)
+        print("sleep: {}s".format(s))
         time.sleep(s)

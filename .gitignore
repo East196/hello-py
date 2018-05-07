@@ -11,4 +11,5 @@
 **/.cache
 **/*.mp4
 .idea/**
+douyin/**
 LICENSE

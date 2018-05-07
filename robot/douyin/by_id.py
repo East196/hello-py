@@ -4,13 +4,10 @@ from __future__ import print_function
 
 import random
 import sys
-import urlparse
+import urllib.parse as urlparse
 
 import requests
 from bs4 import BeautifulSoup
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 import json
 import os
