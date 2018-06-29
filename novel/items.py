@@ -1,9 +1,5 @@
 # coding=utf-8
 from jinja2 import Template
-import sys
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 
 class Entity(object):
@@ -28,7 +24,7 @@ class Item(Entity):
 
 
 class Actor(Entity):
-    def __init__(self, name, force=40, wit=40,speed=40, items=[]):
+    def __init__(self, name, force=40, wit=40, speed=40, items=[]):
         super(Actor, self).__init__(name)
         self.name = name
         self.force = force
@@ -74,7 +70,7 @@ class Scene(Entity):
 
     def render(self):
         if self.description:
-            print self.description
+            print(self.description)
 
     def set_exits(self, exits=[]):
         for exit in exits:
@@ -117,7 +113,7 @@ class IntoEvent(Event):
                 MeetEvent(scene=sub_scene, participants=[self.participants[0], person])
 
     def render(self):
-        print "%s%s%s." % (self.participants[0].name, self.name, self.scene.name)
+        print("%s%s%s." % (self.participants[0].name, self.name, self.scene.name))
 
 
 class SeeEvent(Event):
@@ -131,7 +127,7 @@ class SeeEvent(Event):
         IntoEvent(scene=self.scene, participants=self.participants)
 
     def render(self):
-        print "%s%s%s." % (self.participants[0].name, self.name, self.scene.name)
+        print("%s%s%s." % (self.participants[0].name, self.name, self.scene.name))
 
 
 class MeetEvent(Event):
@@ -147,7 +143,7 @@ class MeetEvent(Event):
             TalkEvent(scene=self.scene, participants=self.participants, topic=HelloTopic(""))
 
     def render(self):
-        print "%s%s%s." % (self.participants[0].name, self.name, self.participants[1].name)
+        print("%s%s%s." % (self.participants[0].name, self.name, self.participants[1].name))
 
 
 class BeatEvent(Event):
@@ -160,24 +156,24 @@ class BeatEvent(Event):
         pass
 
     def render(self):
-        print Template(u"{{ model.participants[1].name }}直扑{{ model.participants[0].name }}而来，").render(model=self)
+        print(Template(u"{{ model.participants[1].name }}直扑{{ model.participants[0].name }}而来，").render(model=self))
         has_weapon = lambda item: item.usage == ItemType.WEAPON
         weapon = filter(has_weapon, self.participants[0].items)[0]
         self.weapon = weapon
         if filter(has_weapon, self.participants[0].items):
-            print Template(
+            print(Template(
                 u"{{ model.participants[0].name }}拿起{{ model.weapon.name }}，"
                 u"狠狠的给了{{ model.participants[1].name }}一击.").render(
-                model=self)
+                model=self))
         # TODO 英雄之旅
         if self.participants[0].force > self.participants[1].force:
-            print "%s%s！" % (self.participants[1].name, "疼的打了个滚，鲜血直流")
+            print("%s%s！" % (self.participants[1].name, "疼的打了个滚，鲜血直流"))
         else:
-            print Template(u"{{ model.participants[1].name }}毫无知觉!").render(model=self)
+            print(Template(u"{{ model.participants[1].name }}毫无知觉!").render(model=self))
         if self.participants[0].force > self.participants[1].force:
-            print "%s%s%s." % (self.participants[0].name, "打死了", self.participants[1].name)
+            print("%s%s%s." % (self.participants[0].name, "打死了", self.participants[1].name))
         else:
-            print Template(u"{{ model.participants[0].name }}被{{ model.participants[1].name }}吃掉了!").render(model=self)
+            print(Template(u"{{ model.participants[0].name }}被{{ model.participants[1].name }}吃掉了!").render(model=self))
 
 
 class TalkEvent(Event):
@@ -192,8 +188,8 @@ class TalkEvent(Event):
 
     def render(self):
         if isinstance(self.topic, HelloTopic):
-            print Template(u"'你好，{{ model.participants[1].name }}',{{ model.participants[0].name }}说。").render(
-                model=self)
+            print(Template(u"'你好，{{ model.participants[1].name }}',{{ model.participants[0].name }}说。").render(
+                model=self))
 
 
 class Topic(Entity):
@@ -204,11 +200,11 @@ class HelloTopic(Topic):
     pass
 
 
-shaobang = Item("哨棒",usage=ItemType.WEAPON)
-stone = Item("石头",usage=ItemType.WEAPON)
+shaobang = Item("哨棒", usage=ItemType.WEAPON)
+stone = Item("石头", usage=ItemType.WEAPON)
 
-laohu = Master("老虎", 90, 20,items=[stone])
-xiaoming = Actor("小明",items=[stone])
+laohu = Master("老虎", 90, 20, items=[stone])
+xiaoming = Actor("小明", items=[stone])
 wusong = Hero("武松", 98, 50, items=[shaobang])
 dianjia = Npc("店家")
 

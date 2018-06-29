@@ -9,10 +9,10 @@ from os.path import realpath, dirname, join
 sys.path.insert(0, join(dirname(realpath(sys.argv[0])), '..', 'src'))
 
 
-from novel.swallows import Publisher
+from novel.swallows.engine.events import Publisher
 
 # 在world中构建了整个世界
-from novel.swallows import alice, bob, house
+from novel.swallows.story.world import alice, bob, house
 
 # 出发点在于人
 # ## 主体 ## #

@@ -6,22 +6,20 @@
 
 import sys
 
-reload(sys)
-sys.setdefaultencoding('utf8')
+
 from os.path import realpath, dirname, join
 
 # get the ../src/ directory onto the Python module search path
 sys.path.insert(0, join(dirname(realpath(sys.argv[0])), '..', 'src'))
 
 # now we can import the classes we will work with
-from novel.swallows import Publisher
-from novel.swallows import MaleCharacter
-from novel.swallows import (
+from novel.swallows.story.characters import MaleCharacter
+from novel.swallows.story.world import (
     alice, bob, house, upstairs_hall,
     revolver, brandy, dead_body
 )
-from novel.swallows import (
-    ProperContainer, Item, ProperLocation)
+from novel.swallows.engine.events import Publisher
+from novel.swallows.engine.objects import Location, ProperLocation, Male, Item, ProperContainer
 
 # we extend the world of The Swallows by adding a new character.
 # note that we have to inform the new character of certain important objects

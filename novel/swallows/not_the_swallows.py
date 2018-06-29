@@ -6,8 +6,7 @@
 
 import sys
 
-reload(sys)
-sys.setdefaultencoding('utf8')
+
 # Example of using _The Swallows_ engine, but not its world,
 # to produce a different story.
 #
@@ -19,8 +18,8 @@ from os.path import realpath, dirname, join
 sys.path.insert(0, join(dirname(realpath(sys.argv[0])), '..', 'src'))
 
 # now we can:
-from novel.swallows import Publisher
-from novel.swallows import Location, ProperLocation, Male
+from novel.swallows.engine.events import Publisher
+from novel.swallows.engine.objects import Location, ProperLocation, Male
 
 ### world ###
 
