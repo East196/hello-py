@@ -3,18 +3,18 @@
 
 import redis
 
-print redis.__file__
+print((redis.__file__))
 # 连接，可选不同数据库
 redis = redis.Redis(host='localhost', port=6379, db=0)
 
 info = redis.info()
-print info
+print(info)
 keys = redis.keys("*")
-print keys
+print(keys)
 
 keys = redis.hkeys("keys")
-print keys
-print len(keys)
+print(keys)
+print((len(keys)))
 
 key__value = redis.hget("key", 'hashkey')
-print key__value
+print(key__value)

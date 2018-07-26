@@ -44,7 +44,7 @@ def show_my_msg(session):
     """
     msg_url = "http://msg.csdn.net/"
     r2 = session.get(msg_url)
-    print(r2.text)
+    print((r2.text))
 
 
 if __name__ == '__main__':
@@ -70,7 +70,7 @@ if __name__ == '__main__':
         })
         print(article_comment_url)
         print(comment)
-        print(r2.json())
+        print((r2.json()))
         seconds = random.randint(60, 180)
-        print("sleep {}s".format(seconds))
+        print(("sleep {}s".format(seconds)))
         time.sleep(seconds)

@@ -51,28 +51,28 @@ class Trans:
 
     def fill(self):
         lines = open("E:/lottor.txt", 'r').readlines()
-        values = map(lambda line: line.split(' ')[0], lines)
+        values = [line.split(' ')[0] for line in lines]
         for i in range(1, self.count):
             self.trans[values[i - 1]][values[i]] += 1.0
         return self
 
 
 count = 12
-states = map(lambda value: str(value).zfill(2), range(1, count))
-print states
+states = [str(value).zfill(2) for value in range(1, count)]
+print(states)
 lines = open("lottor.txt", 'r').readlines()
-cols = map(lambda line: line.split(' ')[5], lines)
-print cols
+cols = [line.split(' ')[5] for line in lines]
+print(cols)
 start = {}
 for i in range(1, count + 1):
     start[str(i).zfill(2)] = 0.0
 start[cols[0]] = 1.0 / count
-print start
+print(start)
 # for line in lines:
 #     print line
 trans = Trans(count).fill().trans
-print trans
+print(trans)
 emit = Emits(count).emits
-print emit
+print(emit)
 
-print viterbi(cols, states, start, trans, emit)
+print(viterbi(cols, states, start, trans, emit))

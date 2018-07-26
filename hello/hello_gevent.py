@@ -6,7 +6,7 @@ from gevent import monkey
 
 monkey.patch_all()
 
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from gevent.pool import Pool
 
 
@@ -16,7 +16,7 @@ def download(url):
     :param url: http url
     :return: response doc
     """
-    return urllib2.urlopen(url).read()
+    return urllib.request.urlopen(url).read()
 
 
 class Download():
@@ -24,7 +24,7 @@ class Download():
         pass
 
     def do(self, url):
-        return urllib2.urlopen(url).read()
+        return urllib.request.urlopen(url).read()
 
 
 if __name__ == '__main__':
@@ -33,9 +33,9 @@ if __name__ == '__main__':
     d = Download()
 
     aresults = pool.map_async(d.do, urls)
-    print aresults
+    print(aresults)
 
     results = pool.map(d.do, urls)
-    print len(results)
-    print "===", results
-    print "========", aresults.get()
+    print(len(results))
+    print("===", results)
+    print("========", aresults.get())

@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
 import sys
+import imp
 
-reload(sys)
+imp.reload(sys)
 sys.setdefaultencoding('utf8')
-print sys.getdefaultencoding()
+print(sys.getdefaultencoding())
 
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from bs4 import BeautifulSoup
 from random import randint
 import time
 import json
 import codecs
 
-file_name = u"d:/anjuke.index.html"
+file_name = "d:/anjuke.index.html"
 
 # home = 'http://sz.fang.anjuke.com/loupan/all/'
 # response = urllib2.urlopen(home)
@@ -61,10 +62,10 @@ for e in root.iter():
             try:
                 if [y[0] for y in metas].index(field_class) is -1:
                     metas.append(meta)
-                    print meta, item_string
+                    print(meta, item_string)
             except ValueError:
                 metas.append(meta)
-                print meta, item_string
+                print(meta, item_string)
 
                 # text=root.xpath(path)[0].text
                 # if text is not None:
@@ -76,9 +77,9 @@ for e in root.iter():
 class_ = root.xpath(one_item_paths[0][0])[0].get("class")
 items_path = one_item_paths[0][0].replace("div[19]", "div") + "[@class='" + class_ + "']"
 one_page_item_size = len(root.xpath(items_path))
-print items_path
-print root.getpath(root.xpath(items_path)[0])
-print root.getpath(root.xpath(items_path)[-1])
-print one_page_item_size
+print(items_path)
+print(root.getpath(root.xpath(items_path)[0]))
+print(root.getpath(root.xpath(items_path)[-1]))
+print(one_page_item_size)
 for meta in metas:
-    print str(meta)
+    print(str(meta))

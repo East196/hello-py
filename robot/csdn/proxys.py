@@ -40,26 +40,26 @@ def get_proxys():
         resp = requests.get(real_page_link, headers=req_headers)
         # print(resp.text)
         if resp.status_code != requests.codes.ok:
-            print(resp.status_code)
+            print((resp.status_code))
             print("resp error")
             pass
         html = etree.HTML(resp.text)
         trs = html.xpath('//div[@id="list"]/table/tbody/tr')  # 新版博客目录
-        print(len(trs))
+        print((len(trs)))
         time.sleep(1)
         for tr in trs:
             ip = tr.xpath('td[@data-title="IP"]/text()')[0]
             port = tr.xpath('td[@data-title="PORT"]/text()')[0]
-            safe = tr.xpath(u'td[@data-title="匿名度"]/text()')[0]
-            type = tr.xpath(u'td[@data-title="类型"]/text()')[0]
-            address = tr.xpath(u'td[@data-title="位置"]/text()')[0]
-            speed = tr.xpath(u'td[@data-title="响应速度"]/text()')[0]
-            last_time = tr.xpath(u'td[@data-title="最后验证时间"]/text()')[0]
+            safe = tr.xpath('td[@data-title="匿名度"]/text()')[0]
+            type = tr.xpath('td[@data-title="类型"]/text()')[0]
+            address = tr.xpath('td[@data-title="位置"]/text()')[0]
+            speed = tr.xpath('td[@data-title="响应速度"]/text()')[0]
+            last_time = tr.xpath('td[@data-title="最后验证时间"]/text()')[0]
             proxy = {
                 "ip": ip, "port": port, "safe": safe, "type": type, "address": address, "speed": speed, "last_time": last_time
             }
-            print(json.dumps(proxy, ensure_ascii=False))
-            yield u"{proto}://{ip}:{port}".format(proto=type.lower(), ip=ip, port=port)
+            print((json.dumps(proxy, ensure_ascii=False)))
+            yield "{proto}://{ip}:{port}".format(proto=type.lower(), ip=ip, port=port)
 
 
 if __name__ == '__main__':

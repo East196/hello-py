@@ -29,8 +29,8 @@ session = DBSession()
 # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
 user = session.query(User).filter(User.id == '1').one()
 # 打印类型和对象的name属性:
-print 'type:', type(user)
-print 'name:', user.name
-print user
+print(('type:', type(user)))
+print(('name:', user.name))
+print(user)
 # 关闭Session:
 session.close()

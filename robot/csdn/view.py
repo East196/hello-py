@@ -19,7 +19,7 @@ def view(browser, blog):
         try:
             browser.get(html)
             s = random.randint(3, 5)
-            print(s, html)
+            print((s, html))
             time.sleep(s)
         except Exception as  e:
             print(e)

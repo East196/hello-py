@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import math
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 # wxpython
 import wx
@@ -12,7 +12,7 @@ from hello.hello_ml.hello_knn import knn_classify
 
 class MyFrame(wx.Frame):
     def __init__(self):
-        html = urllib2.urlopen("http://tool.chinaz.com/Tools/web").read()
+        html = urllib.request.urlopen("http://tool.chinaz.com/Tools/web").read()
         soup = BeautifulSoup(html, "lxml")
         labeled_colors = []
         for color in soup.select("div.color"):
@@ -54,12 +54,12 @@ class MyFrame(wx.Frame):
                 trace['x'] = self.traces[-1]['x']
             else:
                 trace['y'] = self.traces[-1]['y']
-        dlg = wx.TextEntryDialog(None, u"站点的名字是?", u"站点", u"")
+        dlg = wx.TextEntryDialog(None, "站点的名字是?", "站点", "")
         if dlg.ShowModal() == wx.ID_OK:
             trace['name'] = dlg.GetValue()  # 填入名称
 
         self.traces.append(trace)
-        print(self.traces)
+        print((self.traces))
 
 
 if __name__ == '__main__':

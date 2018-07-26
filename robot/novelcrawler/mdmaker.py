@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
+import imp
 
-reload(sys)
+imp.reload(sys)
 sys.setdefaultencoding('utf8')
 
 import json
@@ -13,6 +14,6 @@ if __name__ == '__main__':
         json_array = json.load(fp)
     with open("jianke.md", "w") as fp:
         for d in json_array:
-            print d['title']
+            print(d['title'])
             fp.write(d['title'] + os.linesep)
             fp.write(d['desc'] + os.linesep)

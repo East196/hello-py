@@ -10,9 +10,9 @@ if __name__ == '__main__':
                       headers={'content-type': 'application/json'})
     lr = r.json()
     token = lr['response']['user']['authentication_token']
-    print lr
-    print type(lr)
-    print token
+    print(lr)
+    print(type(lr))
+    print(token)
     r = requests.get('http://127.0.0.1:5000/',
                      headers={'Authentication-Token': token})
-    print r.text
+    print(r.text)

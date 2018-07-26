@@ -12,7 +12,7 @@ def press(button):
     else:
         usr = app.getEntry("用户名")
         pwd = app.getEntry("密码")
-        print("User:", usr, "Pass:", pwd)
+        print(("User:", usr, "Pass:", pwd))
 
 
 # create a GUI variable called app

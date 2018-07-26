@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from __future__ import division, print_function, unicode_literals
 
-import urllib
-import urllib2
-import cookielib
+
+import urllib.request, urllib.parse, urllib.error
+import urllib.request, urllib.error, urllib.parse
+import http.cookiejar
 import json
 import re
 import wx
@@ -38,13 +38,13 @@ class Frame1(wx.Frame):
                                          label='用户名：', name='staticText1', parent=self.panel1,
                                          pos=wx.Point(8, 16), size=wx.Size(95, 23), style=0)
         self.staticText1.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD,
-                                         False, u'Tahoma'))
+                                         False, 'Tahoma'))
 
         self.staticText2 = wx.StaticText(id=wxID_FRAME1STATICTEXT2,
                                          label='密码：', name='staticText2', parent=self.panel1,
                                          pos=wx.Point(8, 56), size=wx.Size(92, 23), style=0)
         self.staticText2.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD,
-                                         False, u'Tahoma'))
+                                         False, 'Tahoma'))
 
         self.textCtrl1 = wx.TextCtrl(id=wxID_FRAME1TEXTCTRL1, name='textCtrl1',
                                      parent=self.panel1, pos=wx.Point(112, 16), size=wx.Size(176, 24),
@@ -64,13 +64,13 @@ class Frame1(wx.Frame):
                                          label='签到 状态 ......', name='staticText3', parent=self.panel1,
                                          pos=wx.Point(16, 104), size=wx.Size(352, 96), style=0)
         self.staticText3.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.BOLD,
-                                         False, u'Tahoma'))
+                                         False, 'Tahoma'))
         self.button1.Bind(wx.EVT_BUTTON, self.OnButton1Button,
                           id=wxID_FRAME1BUTTON1)
 
-        cj = cookielib.CookieJar()
-        self.opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
-        urllib2.install_opener(self.opener)
+        cj = http.cookiejar.CookieJar()
+        self.opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+        urllib.request.install_opener(self.opener)
         self.opener.addheaders = [('User-agent', 'IE')]
 
     def __init__(self, parent):
@@ -78,13 +78,13 @@ class Frame1(wx.Frame):
 
     def login(self, username, password):
         url = 'https://www.kuaipan.cn/index.php?ac=account&op=login'
-        data = urllib.urlencode({'username': username, 'userpwd': password})
-        req = urllib2.Request(url, data)
+        data = urllib.parse.urlencode({'username': username, 'userpwd': password})
+        req = urllib.request.Request(url, data)
 
         try:
             fd = self.opener.open(req)
 
-        except Exception, e:
+        except Exception as e:
             self.staticText3.SetLabel('网络连接错误！')
             return False
         if fd.url != "http://www.kuaipan.cn/home.htm":
@@ -95,14 +95,14 @@ class Frame1(wx.Frame):
 
     def logout(self):
         url = 'http://www.kuaipan.cn/index.php?ac=account&op=logout'
-        req = urllib2.Request(url)
+        req = urllib.request.Request(url)
         fd = self.opener.open(req)
         fd.close()
 
     def sign(self):
 
         url = 'http://www.kuaipan.cn/index.php?ac=common&op=usersign'
-        req = urllib2.Request(url)
+        req = urllib.request.Request(url)
         fd = self.opener.open(req)
         sign_js = json.loads(fd.read())
 

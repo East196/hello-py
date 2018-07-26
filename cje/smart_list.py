@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
+
 
 import json
 import sys
+import imp
 
-reload(sys)
+imp.reload(sys)
 sys.setdefaultencoding('utf8')
 print(sys.getdefaultencoding())
 
 from lxml import etree
 
-file_name = u"anjuke.index.html"
+file_name = "anjuke.index.html"
 parser = etree.HTMLParser()
 root = etree.parse(file_name, parser)
 

@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
 
-import ConfigParser
-import cookielib
+
+import configparser
+import http.cookiejar
 import json
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from time import sleep
 
 import binascii
@@ -15,7 +15,7 @@ from bs4 import BeautifulSoup
 
 class ConfigAccountProvider(object):
     def __init__(self, path="F:\cje\influence.conf"):
-        self.config = ConfigParser.ConfigParser()
+        self.config = configparser.ConfigParser()
         self.config.read(path)
         self.k = pyDes.des("8888", pyDes.CBC, "\0\0\0\0\0\0\0\0", pad=None, padmode=pyDes.PAD_PKCS5)
 
@@ -55,12 +55,12 @@ class HttpRequest(object):
             cookie_jar_provider = WeiboCookieJarProvider(provider.find_all())
             self.cookie_jar = cookie_jar_provider.get_random()
         else:
-            self.cookie_jar = cookielib.LWPCookieJar()
-        cookie_support = urllib2.HTTPCookieProcessor(self.cookie_jar)
-        opener = urllib2.build_opener(cookie_support, urllib2.HTTPHandler)
+            self.cookie_jar = http.cookiejar.LWPCookieJar()
+        cookie_support = urllib.request.HTTPCookieProcessor(self.cookie_jar)
+        opener = urllib.request.build_opener(cookie_support, urllib.request.HTTPHandler)
         http_headers = [('User-agent', 'Mozilla/5.0 (X11; Linux i686; rv:8.0) Gecko/20100101 Firefox/8.0')]
         opener.addheaders = http_headers
-        urllib2.install_opener(opener)
+        urllib.request.install_opener(opener)
         self.delay = delay
 
     def get_html(self, url):
@@ -70,7 +70,7 @@ class HttpRequest(object):
         :return: 页面内容
         """
         sleep(self.delay)
-        html_document = urllib2.urlopen(url).read()
+        html_document = urllib.request.urlopen(url).read()
         return html_document
 
     def get_json(self, url):
@@ -80,7 +80,7 @@ class HttpRequest(object):
         :return: 使用dict表示的json
         """
         sleep(self.delay)
-        json_document = urllib2.urlopen(url).read()
+        json_document = urllib.request.urlopen(url).read()
         return json.loads(json_document)
 
     def get_soup(self, url):
@@ -90,7 +90,7 @@ class HttpRequest(object):
         :return: 使用BeautifulSoup表示的节点树
         """
         sleep(self.delay)
-        response = urllib2.urlopen(url)
+        response = urllib.request.urlopen(url)
         html = response.read()
         soup = BeautifulSoup(html, "lxml")
         return soup

@@ -30,7 +30,7 @@ app.setSticky("nwe")
 
 
 def model_change(f):
-    print(f, app.getOptionBox("model"))
+    print((f, app.getOptionBox("model")))
     model_name = app.getOptionBox("model")
     model = models.get(Model.name == model_name)
     print(model)
@@ -58,7 +58,7 @@ app.setSticky("nwe")
 
 
 def tpl_change(f):
-    print(f, app.getOptionBox("tpl"))
+    print((f, app.getOptionBox("tpl")))
     tpl_name = app.getOptionBox("tpl")
     tpl = tpls.get(Model.name == tpl_name)
     print(tpl)
@@ -130,8 +130,9 @@ def gene_it(f):
     configs.update({"value": path}, Config.name == "path")
     database = app.getEntry("数据库")
     configs.update({"value": database}, Config.name == "database")
-    with open("%s/%s.py" % (path, model["name"]), "w",encoding="utf-8") as fp:
+    with open("%s/%s.py" % (path, model["name"]), "w", encoding="utf-8") as fp:
         fp.write(result)
+
 
 # TODO 考虑装插件直接使用 yaml和 jinja2 文件
 app.enableEnter(gene_it)

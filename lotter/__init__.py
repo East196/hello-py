@@ -35,4 +35,4 @@ states = ['Sunny', 'Rainy']
 start = {'Rainy': 0.6, 'Sunny': 0.4}
 trans = {'Rainy': {'Rainy': 0.7, 'Sunny': 0.3}, 'Sunny': {'Rainy': 0.4, 'Sunny': 0.6}}
 emit = {'Rainy': {'Walk': 0.1, 'Shop': 0.4, 'Clean': 0.5}, 'Sunny': {'Walk': 0.6, 'Shop': 0.3, 'Clean': 0.1}}
-print viterbi(obs, states, start, trans, emit)
+print(viterbi(obs, states, start, trans, emit))

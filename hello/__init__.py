@@ -9,10 +9,10 @@ import logging.config
 
 def log(func):
     def wrapper(*args, **kw):
-        print 'call %s() in %s :' % (func.__name__, datetime.datetime.now())
+        print('call %s() in %s :' % (func.__name__, datetime.datetime.now()))
         result = func(*args, **kw)
         time.sleep(0.1)
-        print 'called %s() in %s :' % (func.__name__, datetime.datetime.now())
+        print('called %s() in %s :' % (func.__name__, datetime.datetime.now()))
         return result
 
     return wrapper
@@ -20,7 +20,7 @@ def log(func):
 
 @log
 def now():
-    print '2013-12-25'
+    print('2013-12-25')
 
 now()
 

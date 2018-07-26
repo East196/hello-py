@@ -8,8 +8,8 @@ def print_content(msg):
     print(msg)
 
     itchat.send('greeting, filehelper!', "filehelper")
-    name = itchat.search_friends(name=u'谁啊')[0]
-    print name
+    name = itchat.search_friends(name='谁啊')[0]
+    print(name)
     name.send("good")
 
 

@@ -15,14 +15,14 @@ http = urllib3.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
 
 def vedio_download(video_name, video_url):
     if os.path.exists(video_name):
-        print("downloaded! {video_name} by {video_url}".format(video_name=video_name, video_url=video_url))
+        print(("downloaded! {video_name} by {video_url}".format(video_name=video_name, video_url=video_url)))
         return
     size = 0
     with closing(http.request('GET', video_url, preload_content=False)) as response:
         chunk_size = 1024
         content_size = int(response.headers['content-length'])
         if response.status == 200:
-            print('[文件大小]：%0.2f MB' % (content_size / chunk_size / 1024.0))
+            print(('[文件大小]：%0.2f MB' % (content_size / chunk_size / 1024.0)))
             with open(video_name, 'wb') as file:
                 for data in response.stream(chunk_size):
                     file.write(data)

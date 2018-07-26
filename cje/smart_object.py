@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 import sys
+import imp
 
-reload(sys)
+imp.reload(sys)
 sys.setdefaultencoding('utf8')
-print sys.getdefaultencoding()
+print(sys.getdefaultencoding())
 
 from lxml import etree
 
-file_name = u"d:/anjuke.index.html"
+file_name = "d:/anjuke.index.html"
 parser = etree.HTMLParser()
 root = etree.parse(file_name, parser)
 
@@ -36,10 +37,10 @@ for e in root.iter():
             try:
                 if [y["name"] for y in metas].index(field_class) is -1:
                     metas.append(meta)
-                    print meta, item_string
+                    print(meta, item_string)
             except ValueError:
                 metas.append(meta)
-                print meta, item_string
+                print(meta, item_string)
 
                 # text=root.xpath(path)[0].text
                 # if text is not None:
@@ -51,12 +52,12 @@ for e in root.iter():
 class_ = root.xpath(one_item_paths[0][0])[0].get("class")
 items_path = one_item_paths[0][0].replace("div[19]", "div") + "[@class='" + class_ + "']"
 one_page_item_size = len(root.xpath(items_path))
-print items_path
-print root.getpath(root.xpath(items_path)[0])
-print root.getpath(root.xpath(items_path)[-1])
-print one_page_item_size
+print(items_path)
+print(root.getpath(root.xpath(items_path)[0]))
+print(root.getpath(root.xpath(items_path)[-1]))
+print(one_page_item_size)
 for meta in metas:
-    print str(meta)
+    print(str(meta))
 
 json = {"type": "object", "xpath": items_path, "field_metas": metas}
-print json
+print(json)

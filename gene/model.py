@@ -18,7 +18,7 @@ app.startLabelFrame("模型")
 
 
 def edit(btn):
-    print("edit: %s" % btn, app.getListBox(btn))
+    print(("edit: %s" % btn, app.getListBox(btn)))
     if not app.getListBox(btn): return
     name = app.getListBox(btn)[0]
     model = models.get(Model.name == name)
@@ -49,7 +49,7 @@ app.addScrolledTextArea("内容")
 
 
 def save(btn):
-    print("save: %s" % btn)
+    print(("save: %s" % btn))
     
     name = app.getEntry("名称")
     
@@ -78,7 +78,7 @@ app.addButton("保存", save)
 
 
 def clear(btn):
-    print("clear: %s" % btn)
+    print(("clear: %s" % btn))
     
     app.setEntry("名称", "")
     
@@ -92,7 +92,7 @@ app.addButton("清除", clear)
 
 
 def delete(btn):
-    print("delete: %s" % btn)
+    print(("delete: %s" % btn))
     model = models.get(Model.name == app.getEntry("名称"))
     if model:
         models.remove(doc_ids=[model.doc_id])

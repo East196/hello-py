@@ -19,6 +19,6 @@ def datetime_timestamp(dt):
    return int(s)
 if __name__ == '__main__':
   d = datetime_timestamp('2012-03-28 06:53:40')
-  print d
+  print(d)
   s = timestamp_datetime(14566752*100)
-  print s
+  print(s)

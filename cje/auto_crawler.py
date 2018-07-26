@@ -4,7 +4,7 @@
 爬取器
 """
 
-from __future__ import print_function
+
 import re
 import json
 from xml.sax.saxutils import escape
@@ -72,7 +72,7 @@ class AutoCrawler(object):
 
     @staticmethod
     def _get_list_arg(kwargs):
-        for key, value in kwargs.items():
+        for key, value in list(kwargs.items()):
             if type(value) is list:
                 return key, value
 

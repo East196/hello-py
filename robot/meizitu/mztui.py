@@ -3,8 +3,9 @@
 import sys
 
 from images2gif import writeGif
+import imp
 
-reload(sys)
+imp.reload(sys)
 sys.setdefaultencoding('utf-8')
 
 import os
@@ -12,25 +13,25 @@ import os
 from appJar import gui
 
 app = gui()
-root_path = u"e:/backup/Downloads/mzitu"
-gif_path = u"e:/backup/Downloads/mzitugif"
+root_path = "e:/backup/Downloads/mzitu"
+gif_path = "e:/backup/Downloads/mzitugif"
 
 
 def func(btn):
-    print btn, app.getEntry("关键词")
+    print(btn, app.getEntry("关键词"))
     global sub_pics
     sub_pics = [pic for pic in pics if app.getEntry("关键词") in pic]
     app.updateListBox("列表", sub_pics)
 
 
 def show(listbox):
-    print listbox
+    print(listbox)
     app.reloadImage("clickme", sub_pics[0])
 
 
 def change_ren(listbox):
-    print listbox
-    print app.getListItems("列表")
+    print(listbox)
+    print(app.getListItems("列表"))
     pic = app.getListItems("列表")[0]
     app.reloadImage("clickme", pic)
 
@@ -38,7 +39,7 @@ def change_ren(listbox):
 def start():
     global pics
     pics = [gif_path + "/" + pic for pic in os.listdir(gif_path)]
-    print pics
+    print(pics)
 
     app.addLabelEntry("关键词")
     app.addButton("搜索", func)
@@ -94,7 +95,7 @@ def to_gif():
         gif_name = gifd + dir + ".gif"
         for nim in niml:
             nim.info["duration"] = 200
-        print niml[0].info
+        print(niml[0].info)
         # writeGif(gif_name, niml)
         niml[0].save(gif_name, save_all=True, append_images=niml[1:])
         # imageio.mimsave(gif_name, niml, 'GIF', duration=0.1)

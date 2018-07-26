@@ -37,15 +37,15 @@ fred.configure_objects(
 # we extend the world by adding new locations and objects
 # note that locations exited-to and from must be imported from swallows.story.world (above)
 # "Location" is imported from swallows.engine.objects
-freds_office = ProperLocation(u"<*> 办公室", owner=fred)
+freds_office = ProperLocation("<*> 办公室", owner=fred)
 freds_office.set_exits(upstairs_hall)
 
 upstairs_hall.set_exits(freds_office)  # adds to existing (unknown) exits
 
 # we extend the world by adding some Objects
 # "ProperContainer" and "Item" are imported from swallows.engine.objects
-desk = ProperContainer(u"<*> 书桌", owner=fred, location=freds_office)
-pencils = Item(u'铅笔盒', location=desk)
+desk = ProperContainer("<*> 书桌", owner=fred, location=freds_office)
+pencils = Item('铅笔盒', location=desk)
 
 # ## main ## #
 

@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import imp
 
-reload(sys)
+imp.reload(sys)
 sys.setdefaultencoding('utf8')
 from Crypto.Cipher import PKCS1_v1_5
 from Crypto.PublicKey import RSA
@@ -36,8 +37,8 @@ def encrypt_and_decrypt_test(password="123456"):
     )
     cipher_rsa = PKCS1_v1_5.new(recipient_key)
 
-    en_data = cipher_rsa.encrypt(u"發生的".encode())
-    print(len(en_data), en_data)
+    en_data = cipher_rsa.encrypt("發生的".encode())
+    print((len(en_data), en_data))
 
     # 读取密钥
     private_key = RSA.importKey(

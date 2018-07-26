@@ -3,7 +3,7 @@
 
 import os
 import re
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import json
 import socket
 import urllib.request
@@ -75,7 +75,7 @@ class Crawler:
                 print("产生未知错误，放弃保存")
                 continue
             else:
-                print("小黄图+1,已有" + str(self.__counter) + "张小黄图")
+                print(("小黄图+1,已有" + str(self.__counter) + "张小黄图"))
                 self.__counter += 1
         return
 
@@ -96,13 +96,13 @@ class Crawler:
                 rsp = page.read().decode('unicode_escape')
             except UnicodeDecodeError as e:
                 print(e)
-                print('-----UnicodeDecodeErrorurl:', url)
+                print(('-----UnicodeDecodeErrorurl:', url))
             except urllib.error.URLError as e:
                 print(e)
-                print("-----urlErrorurl:", url)
+                print(("-----urlErrorurl:", url))
             except socket.timeout as e:
                 print(e)
-                print("-----socket timout:", url)
+                print(("-----socket timout:", url))
             else:
                 # 解析json
                 rsp_data = json.loads(rsp)

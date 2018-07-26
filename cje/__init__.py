@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-import ConfigParser
+import configparser
 import json
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from bs4 import BeautifulSoup
 
 
@@ -16,13 +16,13 @@ def test_del_id():
 
 
 def get_soup(page):
-    response = urllib2.urlopen(page)
+    response = urllib.request.urlopen(page)
     html = response.read()
     soup = BeautifulSoup(html, "lxml")
     return soup
 
 
 def get_json_object(url):
-    response = urllib2.urlopen(url)
+    response = urllib.request.urlopen(url)
     json_object = json.loads(response.read())
     return json_object

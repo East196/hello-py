@@ -15,7 +15,7 @@ submit.click()
 time.sleep(2)
 
 articles = []
-page_nums = range(3, 5)
+page_nums = list(range(3, 5))
 for page_num in page_nums:
     page = "http://www.yxkfw.com/forum-41-%s.html" % page_num
     browser.get(page)
@@ -27,11 +27,11 @@ for page_num in page_nums:
             articles.append(acker)
 
 articles = list(set(articles))
-print len(articles), articles
+print(len(articles), articles)
 
 for article in articles:
     index = articles.index(article)
-    print index, article
+    print(index, article)
     try:
         browser.get(article)
         time.sleep(2)

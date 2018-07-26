@@ -22,7 +22,7 @@ def to_json(inst, cls):
     d = dict()
     for c in cls.__table__.columns:
         v = getattr(inst, c.name)
-        if c.type in convert.keys() and v is not None:
+        if c.type in list(convert.keys()) and v is not None:
             try:
                 d[c.name] = convert[c.type](v)
             except:
@@ -69,8 +69,8 @@ def log():
 
 @app.route("/user")
 def user():
-    print User.query.all()
-    print User.query.first()
+    print(User.query.all())
+    print(User.query.first())
     return User.query.first().json
 
 

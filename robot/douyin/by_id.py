@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
+
 
 import random
 import sys
@@ -26,7 +26,7 @@ import urllib3
 class DouYin(object):
     def __init__(self):
         print(sys.getdefaultencoding())
-        print(u"抖音下载!")
+        print("抖音下载!")
         # urllib3连接错误时抛出exceptions.SSLError
         user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'
         self.headers = {'User-Agent': user_agent}

@@ -371,7 +371,7 @@ class Animate(Actor):
     def dump_beliefs(self):
         for subject in self.beliefs.subjects():
             for belief in self.beliefs.beliefs_for(subject):
-                print ".oO{ %s }" % belief
+                print(".oO{ %s }" % belief)
 
     # ##--- 信念的存取修改 ---## #
 

@@ -11,7 +11,7 @@ workbook= xlwt.Workbook()
 # sheetname=u'sheet 1' rowx=0 colx=0
 # 所以在打开时加cell_overwrite_ok=True解决
 
-table = workbook.add_sheet(u'sheet1',cell_overwrite_ok=True)
+table = workbook.add_sheet('sheet1',cell_overwrite_ok=True)
 table.write(0,0,'cctest')
 # 另外，使用style
 style = xlwt.XFStyle()    # 初始化样式

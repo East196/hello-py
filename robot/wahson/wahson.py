@@ -12,8 +12,8 @@ links = browser.find_elements_by_css_selector("#left ul li a")
 
 types = []
 for link in links:
-    print link.text
-    print link.get_attribute("href")
+    print(link.text)
+    print(link.get_attribute("href"))
     type = {}
     type['name'] = link.text
     type['url'] = link.get_attribute("href")
@@ -25,7 +25,7 @@ for type in types:
     time.sleep(2)
     type_items = browser.find_elements_by_css_selector("#DataList1 td table tbody tr:nth-child(2) td a")
     for type_item in type_items:
-        print type_item.text, type_item.get_attribute("href"), type['name']
+        print(type_item.text, type_item.get_attribute("href"), type['name'])
         item = {}
         item['name'] = type_item.text
         item['url'] = type_item.get_attribute("href")
@@ -44,9 +44,9 @@ font = xlwt.Font()  # 为样式创建字体
 font.bold = True
 style.font = font  # 为样式设置字体
 
-table.write(0, 0, u'型号', style)
-table.write(0, 1, u'型号产品链接', style)
-table.write(0, 2, u'类别', style)
+table.write(0, 0, '型号', style)
+table.write(0, 1, '型号产品链接', style)
+table.write(0, 2, '类别', style)
 
 link_style = easyxf('font: underline single')
 i = 1

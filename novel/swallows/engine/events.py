@@ -446,24 +446,24 @@ class Publisher(object):
 
         if self.debug:
             for character in self.characters:
-                print "%s的 EVENTS:" % character.name.upper()
+                print("%s的 EVENTS:" % character.name.upper())
                 for event in collector.events:
                     # 第一参与者
                     if event.participants[0] != character:
                         continue
-                    print "%s 在 %s: %s" % (
+                    print("%s 在 %s: %s" % (
                         [p.render(event=event) for p in event.participants],
                         event.location.render(),
                         event.phrase
-                    )
-                print
+                    ))
+                print()
             for character in self.characters:
-                print "%s的状态:" % character.name.upper()
+                print("%s的状态:" % character.name.upper())
                 # dump intents？导出意图？
                 character.dump_beliefs()
-                print
-            print "- - - - -"
-            print
+                print()
+            print("- - - - -")
+            print()
 
         editor = Editor(collector, self.characters)
         editor.add_transformer(MadeTheirWayToTransformer())
@@ -480,14 +480,14 @@ class Publisher(object):
         editor.publish()
 
     def publish(self):
-        print self.title
-        print "=" * len(self.title)
-        print
+        print(self.title)
+        print("=" * len(self.title))
+        print()
 
         # 逐章生成
         for chapter in range(1, self.chapters + 1):
-            print "第 %d 章" % chapter
-            print "-----------"
-            print
+            print("第 %d 章" % chapter)
+            print("-----------")
+            print()
 
             self.publish_chapter(chapter)

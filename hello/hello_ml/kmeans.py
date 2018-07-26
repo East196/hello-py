@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import sys
+import imp
 
-reload(sys)
+imp.reload(sys)
 sys.setdefaultencoding('utf-8')
 import codecs
 
@@ -14,7 +15,7 @@ import jieba
 import jieba.posseg as pseg
 import gensim
 
-from tool import start_with, name_start
+from .tool import start_with, name_start
 
 
 def kmeans(model, characters_names):
@@ -39,11 +40,11 @@ def aggre3(np_names, word_vectors):
     N = 3
 
     word_vectors = Imputer().fit_transform(word_vectors)
-    print word_vectors
+    print(word_vectors)
     label = KMeans(N).fit(word_vectors).labels_
 
     for c in range(N):
-        print("类别{}：".format(c + 1))
+        print(("类别{}：".format(c + 1)))
         for idx, name in enumerate(np_names[label == c]):
             print(name)
             if idx % 10 == 9:
@@ -58,7 +59,7 @@ def print_aggre3(words, names):
 
 
 def get_book_lines(book_type, book_name):
-    path = u"book/%s/%s.txt" % (book_type, book_name)
+    path = "book/%s/%s.txt" % (book_type, book_name)
 
     with codecs.open(path, 'r', 'utf-8') as fp:
         book_lines = fp.readlines()
@@ -75,7 +76,7 @@ def get_sentences(book_lines):
 
 
 def get_content(book_type, book_name):
-    path = u"book/%s/%s.txt" % (book_type, book_name)
+    path = "book/%s/%s.txt" % (book_type, book_name)
     with codecs.open(path, 'r', 'utf-8') as fp:
         content = fp.read()
     return content
@@ -87,7 +88,7 @@ def get_segments(content):
 
 
 def get_df(segments):
-    word, flag = zip(*segments)
+    word, flag = list(zip(*segments))
     df = pd.DataFrame({'word': word, "flag": flag})
 
     stopwords = pd.read_csv("nlp/stop_words.txt")
@@ -100,7 +101,7 @@ def get_names(df):
     nrdf = nrdf[df.word.apply(lambda word: len(word) > 1 and start_with(word, name_start))]
     nrStat = nrdf.groupby(by=["word"])["word"].agg({"count": np.size}).reset_index().sort_values(by=["count"], ascending=False);
     nr = nrStat[nrStat["count"] > 10]
-    print nr.count()
+    print(nr.count())
     return nr['word'].tolist()
 
 

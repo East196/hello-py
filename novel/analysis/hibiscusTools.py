@@ -11,7 +11,7 @@ minLen = 1
 maxLen = 4
 
 def getAllChineseCharacters(content):
-    regex = u'[\u4e00-\u9fa5]+'
+    regex = '[\u4e00-\u9fa5]+'
     res=re.findall(regex, content)
     return res
 
@@ -60,10 +60,10 @@ def calculateFreedom(wordLst):
     
     count = len(wordLst)
     freedom = 0
-    for word,wordcount in wordDic.items():
+    for word,wordcount in list(wordDic.items()):
         freedom = freedom - float(wordcount)/float(count)*math.log(float(wordcount)/float(count))
     return freedom
 	
 if __name__ == '__main__':
-   lst = [ u'不', u'皮', u'倒', u'皮']
-   print (calculateFreedom(lst))
+   lst = [ '不', '皮', '倒', '皮']
+   print((calculateFreedom(lst)))

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from Tkinter import *
-import tkMessageBox
+from tkinter import *
+import tkinter.messagebox
 
 class Application(Frame):
     def __init__(self, master=None):
@@ -22,7 +22,7 @@ class Application(Frame):
         name = self.nameInput.get() or 'world'
 
         self.text.insert('end', name)
-        tkMessageBox.showinfo('Message', 'Hello, %s' % name)
+        tkinter.messagebox.showinfo('Message', 'Hello, %s' % name)
 
 
 app = Application()

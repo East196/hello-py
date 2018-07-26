@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import ConfigParser
+import configparser
 import smtplib
 from email.mime.text import MIMEText
 
-config = ConfigParser.ConfigParser()
+config = configparser.ConfigParser()
 config.read("d:/influence.conf")
 username = config.get('qqmail', 'username')
 password = config.get('qqmail', 'password')
@@ -22,6 +22,6 @@ try:
     s.login(username, password)
     s.sendmail(username, to, msg.as_string())
     s.quit()
-    print "Success!"
-except smtplib.SMTPException, e:
-    print "Falied,%s" % e
+    print("Success!")
+except smtplib.SMTPException as e:
+    print("Falied,%s" % e)

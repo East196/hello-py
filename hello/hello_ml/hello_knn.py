@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import pickle
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from collections import Counter
 
 import math
@@ -36,7 +36,7 @@ def majority_vote(labels):
     vote_counts = Counter(labels)
     winner, winner_count = vote_counts.most_common(1)[0]
     num_winners = len([count
-                       for count in vote_counts.values()
+                       for count in list(vote_counts.values())
                        if count == winner_count])
 
     if num_winners == 1:
@@ -50,7 +50,7 @@ def knn_classify(k, labeled_points, new_point):
 
     # order the labeled points from nearest to farthest
     by_distance = sorted(labeled_points,
-                         key=lambda (point, _): distance(point, new_point))
+                         key=lambda point__: distance(point__[0], new_point))
 
     # find the labels for the k closest
     k_nearest_labels = [label for _, label in by_distance[:k]]
@@ -61,7 +61,7 @@ def knn_classify(k, labeled_points, new_point):
 
 if __name__ == '__main__':
 
-    html = urllib2.urlopen("http://tool.chinaz.com/Tools/web").read()
+    html = urllib.request.urlopen("http://tool.chinaz.com/Tools/web").read()
     soup = BeautifulSoup(html, "lxml")
     labeled_colors = []
     for color in soup.select("div.color"):
@@ -74,5 +74,5 @@ if __name__ == '__main__':
         pickle.dump(labeled_colors, f)
     with open("labeled_colors.pkl", 'rb') as f:
         labeled_colors = pickle.load(f)
-        print labeled_colors
-    print knn_classify(1, labeled_colors, [1, 253, 1])
+        print(labeled_colors)
+    print(knn_classify(1, labeled_colors, [1, 253, 1]))

@@ -4,8 +4,9 @@ import random
 import sys
 
 import time
+import imp
 
-reload(sys)
+imp.reload(sys)
 sys.setdefaultencoding('utf-8')
 import requests
 from bs4 import BeautifulSoup
@@ -21,19 +22,19 @@ class mzitu():
         all_a = BeautifulSoup(html.text, 'lxml').find('div', class_='all').find_all('a')
         for a in all_a:
             title = a.get_text()
-            print(u'开始保存：', title)  ##加点提示不然太枯燥了
-            path = title.replace(u"?", u'_').replace(u":", u'_')  ##我注意到有个标题带有 ？  这个符号Windows系统是不能创建文件夹的所以要替换掉
+            print(('开始保存：', title))  ##加点提示不然太枯燥了
+            path = title.replace("?", '_').replace(":", '_')  ##我注意到有个标题带有 ？  这个符号Windows系统是不能创建文件夹的所以要替换掉
             time.sleep(random.randrange(50, 200) / 4000.0)
             self.mkdir(path)  ##调用mkdir函数创建文件夹！这儿path代表的是标题title哦！！！！！不要糊涂了哦！
             href = a['href']
-            print href
+            print(href)
             self.html(href)  ##调用html函数把href参数传递过去！href是啥还记的吧？ 就是套图的地址哦！！不要迷糊了哦！
 
     def html(self, href):  ##这个函数是处理套图地址获得图片的页面地址
         html = self.request(href)
         self.headers['referer'] = href
         max_span = BeautifulSoup(html.text, 'lxml').find('div', class_='pagenavi').find_all('span')[-2].get_text()
-        print max_span, len(os.listdir(os.path.curdir))
+        print(max_span, len(os.listdir(os.path.curdir)))
         if int(max_span) > len(os.listdir(os.path.curdir)):
             for page in range(1, int(max_span) + 1):
                 page_url = href + '/' + str(page)
@@ -41,7 +42,7 @@ class mzitu():
                 self.img(page_url)  ##调用img函数
 
     def img(self, page_url):  ##这个函数处理图片页面地址获得图片的实际地址
-        print page_url
+        print(page_url)
         img_html = self.request(page_url)
         img_url = BeautifulSoup(img_html.text, 'lxml').find('div', class_='main-image').find('img')['src']
         self.save(img_url)
@@ -59,12 +60,12 @@ class mzitu():
         base = "E:/backup/Downloads/mzitu"
         isExists = os.path.exists(os.path.join(base, path))
         if not isExists:
-            print u'建了一个名字叫做', path, u'的文件夹！'
+            print('建了一个名字叫做', path, '的文件夹！')
             os.makedirs(os.path.join(base, path))
             os.chdir(os.path.join(base, path))  ##切换到目录
             return True
         else:
-            print u'名字叫做', path, u'的文件夹已经存在了！'
+            print('名字叫做', path, '的文件夹已经存在了！')
             os.chdir(os.path.join(base, path))  ##切换到目录
             return False
 
@@ -79,7 +80,7 @@ if __name__ == '__main__':
             Mzitu = mzitu()  ##实例化
             Mzitu.all_url('http://www.mzitu.com/all')  ##给函数all_url传入参数  你可以当作启动爬虫（就是入口）
         except:
-            print "sleep hahaha and restart"
+            print("sleep hahaha and restart")
             # TODO 根据异常状态调整3处的sleep
             time.sleep(random.randrange(50, 500) / 100.0)
             crawl()

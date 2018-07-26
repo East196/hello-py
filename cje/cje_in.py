@@ -2,12 +2,13 @@
 import sys
 
 import re
+import imp
 
-reload(sys)
+imp.reload(sys)
 sys.setdefaultencoding('utf8')
-print sys.getdefaultencoding()
+print(sys.getdefaultencoding())
 
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from bs4 import BeautifulSoup
 from random import randint
 import time
@@ -20,13 +21,13 @@ def pages_anjuke():
     soup = get_soup(home)
     num = soup.select_one("span.result em").string
     size = 30
-    page_nums = range(1, int(num) / size + 2)
+    page_nums = list(range(1, int(num) / size + 2))
     for page_num in page_nums:
         if page_num == 1:
             page = 'http://sz.fang.anjuke.com/loupan/all/'
         else:
             page = 'http://sz.fang.anjuke.com/loupan/all/p{page_num}/'.format(page_num=page_num)
-        print page
+        print(page)
         yield page
 
 
@@ -44,19 +45,19 @@ def houses_by_page(page):
         else:
             price = int(tag.span.string)
         json_object = {"type": "NEW", "name": name, "address": address, "price": price, "data_link": data_link}
-        print json_object
+        print(json_object)
         yield json_object
 
 
 def get_soup(page):
-    response = urllib2.urlopen(page)
+    response = urllib.request.urlopen(page)
     html = response.read()
     soup = BeautifulSoup(html, "lxml")
     return soup
 
 
 def get_json_object(url):
-    response = urllib2.urlopen(url)
+    response = urllib.request.urlopen(url)
     json_object = json.loads(response.read())
     return json_object
 
@@ -67,9 +68,9 @@ def houses_activiti():
     for page in pages:
         for house in houses_by_page(page):
             houses.append(house)
-    houses = filter(lambda house: house['address'].find(u"深圳周边") == -1, houses)
-    houses = map(boom_location, houses)
-    houses = map(boom_rate, houses)
+    houses = [house for house in houses if house['address'].find("深圳周边") == -1]
+    houses = list(map(boom_location, houses))
+    houses = list(map(boom_rate, houses))
     return houses
 
 
@@ -96,24 +97,24 @@ def filter_by_address(item, field_name):
 def boom_location(house):
     address = house['address']
     try:
-        url = u'http://api.map.baidu.com/geocoder/v2/' \
-              u'?ak=Q0ERGQ0nNRN9xUQs3kqiIK80PUF950zG&output=json&address=%s&city=深圳市' % address
+        url = 'http://api.map.baidu.com/geocoder/v2/' \
+              '?ak=Q0ERGQ0nNRN9xUQs3kqiIK80PUF950zG&output=json&address=%s&city=深圳市' % address
         json_object = get_json_object(url)
         lat = json_object['result']['location']['lat']
         lon = json_object['result']['location']['lng']
         location = {"lat": lat, "lon": lon}
-        print location
+        print(location)
         return location
     except Exception:
-        print "trans error in %s" % address
+        print("trans error in %s" % address)
         return {}
 
 
 def boom_rate(house):
     link = house["data_link"]
     try:
-        url = link.replace(u'http://sz.fang.anjuke.com/loupan/', u'http://sz.fang.anjuke.com/loupan/canshu-') \
-            .replace(u'.html', u'.html?from=loupan_index_more')
+        url = link.replace('http://sz.fang.anjuke.com/loupan/', 'http://sz.fang.anjuke.com/loupan/canshu-') \
+            .replace('.html', '.html?from=loupan_index_more')
         soup = get_soup(url)
         plot_ratio = soup.select_one(
             "#container > div.can-container.clearfix > div.can-left > div:nth-of-type(3) > div.can-border >"
@@ -127,10 +128,10 @@ def boom_rate(house):
         greening_rate = float(re.findall(r"\d+\.?\d*", greening_rate)[0])
         greening_rate = 0 if greening_rate >= 100 or greening_rate < 0 else greening_rate
         rate = {"plotRatio": plot_ratio, "greeningRate": greening_rate}
-        print rate
+        print(rate)
         return rate
     except Exception:
-        print "trans error in %s" % link
+        print("trans error in %s" % link)
         return {}
 
 if __name__ == '__main__':

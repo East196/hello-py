@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
+import imp
 
-reload(sys)
+imp.reload(sys)
 sys.setdefaultencoding('utf8')
 
-import urlparse
+import urllib.parse
 import requests
 from bs4 import BeautifulSoup
 
@@ -27,7 +28,7 @@ def get_json(url):
 
 
 def get_domain(url):
-    split = urlparse.urlsplit(url)
+    split = urllib.parse.urlsplit(url)
     domain = "{scheme}://{netloc}".format(scheme=split.scheme, netloc=split.netloc)
     return domain
 
@@ -65,7 +66,7 @@ if __name__ == '__main__':
     for href in soup.select("#list > dl > dd > a"):
         suburl = get_domain(url) + href.get('href')
         chapter, content = get_chapter(suburl)
-        print chapter, content
+        print(chapter, content)
         with open(txt_name, "a") as fp:
             fp.write(chapter + os.linesep)
             contents = content.split("。")

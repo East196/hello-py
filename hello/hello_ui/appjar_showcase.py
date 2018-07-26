@@ -128,7 +128,7 @@ def add(entry):
 
 # funciton to change the selected tab - called from menu
 def changeTab(tabName):
-    print("Changing to: ", tabName)
+    print(("Changing to: ", tabName))
     app.setTabbedFrameSelectedTab("Tabs", tabName)
     print("done")
 
@@ -358,7 +358,7 @@ with gui("ShowCase") as app:
         app.setGeometry("300x330")
         values={"German":20, "French":10, "English":60, "Dutch": 5, "Belgium":3, "Danish":2}
         app.addPieChart("Nationality", values)
-        app.addLabelOptionBox("Nationality", values.keys())
+        app.addLabelOptionBox("Nationality", list(values.keys()))
         app.addNumericEntry("Percentage")
         def changePie(btn):
             app.setPieChart("Nationality", app.getOptionBox("Nationality"), app.getEntry("Percentage"))
@@ -374,7 +374,7 @@ with gui("ShowCase") as app:
         app.addDatePicker("dp")
         app.setDatePicker("dp")
         def getDate(btn=None):
-            print(app.getDatePicker("dp"))
+            print((app.getDatePicker("dp")))
             return True
         app.addNamedButton("DONE", "DatePicker", app.hideSubWindow)
         app.setStopFunction(getDate)

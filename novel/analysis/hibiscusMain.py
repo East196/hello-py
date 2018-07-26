@@ -41,13 +41,13 @@ class Hibiscus():
         
     def outExcel(self,filename):
         wb = Workbook()
-        table = wb.add_sheet(u'新词')
-        table.write(0,0,u'单词')
-        table.write(0,1,u'出现次数')
-        table.write(0,2,u'凝结度')
-        table.write(0,3,u'自由度')
+        table = wb.add_sheet('新词')
+        table.write(0,0,'单词')
+        table.write(0,1,'出现次数')
+        table.write(0,2,'凝结度')
+        table.write(0,3,'自由度')
         lst = []
-        for k,v in self.novelInfo.items():
+        for k,v in list(self.novelInfo.items()):
             if v['count']>30 and len(k)>1 and v['solidification']>50 and v['freedom']>3:
                 lst.append(v)
         
@@ -63,7 +63,7 @@ class Hibiscus():
         wb.save('./'+os.path.splitext(os.path.basename(filename))[0] +'.xls')
         
     def calculte(self):
-        for word,info in self.novelInfo.items():
+        for word,info in list(self.novelInfo.items()):
             self.novelInfo[word]['solidification']= self.getSolidification(word)       
             self.novelInfo[word]['freedom'] = self.getFreedom(self.novelInfo[word])
     def getFreedom(self,wordinfo):

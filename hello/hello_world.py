@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import imp
 
 
-reload(sys)
+imp.reload(sys)
 sys.setdefaultencoding('utf8')
 import base64
 
@@ -63,7 +64,7 @@ with open('private.pem', 'r') as f:
 # =================================
 
 # 明文：业务员发现的商机
-message = u'fs范德薩'
+message = 'fs范德薩'
 
 # 业务员用公司经理事先给的公钥对明文加密，得到密文
 crypto_email_text = rsa.encrypt(message.encode(), pubkey)
@@ -99,7 +100,7 @@ print(message)
 # =================================
 
 # 明文：公司经理的指令
-message = u'ddddddddddddd'
+message = 'ddddddddddddd'
 
 # 公司经理私钥签名
 crypto_email_text = rsa.sign(message.encode(), privkey, 'SHA-1')
@@ -108,8 +109,8 @@ crypto_email_text = rsa.sign(message.encode(), privkey, 'SHA-1')
 rsa.verify(message.encode(), crypto_email_text, pubkey)
 
 
-if u"离线" in u"离线啊啊" :
-    print "ok"
+if "离线" in "离线啊啊" :
+    print("ok")
 
 #!/usr/bin/env python
 # coding=utf-8

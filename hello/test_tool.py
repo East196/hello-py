@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import yaml
-from tool import *
+from .tool import *
 
 
 def test_search_path():
@@ -14,8 +14,8 @@ def test_search_path():
     """
 
     o = yaml.load(yo)
-    assert "e" == search_path(o, u"解")
-    assert "a.b.c" == search_path(o, u"焦飞")
+    assert "e" == search_path(o, "解")
+    assert "a.b.c" == search_path(o, "焦飞")
 
 
 def test_leaf_path():
@@ -29,4 +29,4 @@ def test_leaf_path():
 
     o = yaml.load(yo)
     for k, v in leaf_path(o):
-        print k, v
+        print(k, v)

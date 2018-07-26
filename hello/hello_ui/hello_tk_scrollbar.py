@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from Tkinter import *
+from tkinter import *
 
 if __name__ == '__main__':
 

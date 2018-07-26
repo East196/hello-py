@@ -10,14 +10,14 @@ def github_register(users):
     browser.maximize_window()
 
     for user in users:
-        print(user['username'])
+        print((user['username']))
         url = 'https://github.com/join?source=header-home'
         print(url)
         browser.get(url)
         time.sleep(3)
-        print(browser.page_source)
+        print((browser.page_source))
         u = browser.find_element_by_id('user_login')
-        print(u.text)
+        print((u.text))
         u.send_keys('%s' % user['username'])
         m = browser.find_element_by_id('user_email')
         m.send_keys('%s' % user['email'])

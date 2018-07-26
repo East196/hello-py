@@ -13,10 +13,10 @@ def auto_click(articles, proxies=[]):
             article_link = random.choice(articles)
             try:
                 requests.get(protoarticle(article_link), timeout=TIME_OUT, headers=req_headers, proxies=ip2proxy(ip))
-                print(article_link, "ok")
+                print((article_link, "ok"))
                 time.sleep(0.25)
             except:
-                print(article_link, "fail")
+                print((article_link, "fail"))
                 time.sleep(0.1)
                 break
 

@@ -9,10 +9,10 @@
 # TODO url解数据返回单条或多条
 # TODO 数据转换
 # TODO 数据存储
-from __future__ import print_function
-import ConfigParser
 
-config = ConfigParser.ConfigParser()
+import configparser
+
+config = configparser.ConfigParser()
 config.read("data_saver.conf")
 
 
@@ -50,10 +50,10 @@ class CsvSaver(DataSaver):
         """
         if items is None:
             items = []
-        lines = [','.join([value for key, value in item.items()]) + '\n'
+        lines = [','.join([value for key, value in list(item.items())]) + '\n'
                  for item in items]
         if self.with_head:
-            head = ','.join([key for key, value in items[0].items()]) + '\n'
+            head = ','.join([key for key, value in list(items[0].items())]) + '\n'
             lines = [head] + lines
         with open(table, 'w') as fp:
             fp.writelines(lines)
@@ -113,14 +113,14 @@ class HBaseSaver(DataSaver):
             self.connection.create_table(table, {'info': dict(), 'stat': dict()})
         else:
             print('keep table')
-        families = [key for key, _ in self.table.families().items()]
+        families = [key for key, _ in list(self.table.families().items())]
         print(families)
 
         key_generator = get_row_generator(table)
         key_data = {key_generator(item): HBaseSaver.family_item(families, item) for item in items}
 
         print(key_data)
-        for key, data in key_data.items():
+        for key, data in list(key_data.items()):
             self.table.put(key, data)
 
         print(self.table.row('888'))
@@ -133,7 +133,7 @@ class HBaseSaver(DataSaver):
         :param item: 待传入的原始数据
         :return: key改变后的准备放入hbase的数据
         """
-        return {HBaseSaver.family_key(families, key): value for key, value in item.items()}
+        return {HBaseSaver.family_key(families, key): value for key, value in list(item.items())}
 
     @staticmethod
     def family_key(families, key):

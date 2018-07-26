@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from Tkinter import *
-import ttk
+from tkinter import *
+import tkinter.ttk
 
 root = Tk()
 root.geometry("800x600")
 
-tv = ttk.Treeview(root, height=10, columns=('col1', 'col2', 'col3'))
+tv = tkinter.ttk.Treeview(root, height=10, columns=('col1', 'col2', 'col3'))
 tv.column('col1', width=100, anchor='center')
 tv.column('col2', width=100, anchor='center')
 tv.column('col3', width=100, anchor='center')
@@ -17,8 +17,8 @@ tv.heading('col3', text='三列')
 
 def onDBClick(event):
     item = tv.selection()[0]
-    print item
-    print "you clicked on ", tv.item(item, "values")
+    print(item)
+    print("you clicked on ", tv.item(item, "values"))
 
 
 for i in range(1000):
@@ -28,7 +28,7 @@ tv.bind("<Double-1>", onDBClick)
 tv.pack()
 
 # ----vertical scrollbar------------
-vbar = ttk.Scrollbar(root, orient=VERTICAL, command=tv.yview)
+vbar = tkinter.ttk.Scrollbar(root, orient=VERTICAL, command=tv.yview)
 tv.configure(yscrollcommand=vbar.set)
 tv.grid(row=0, column=0, sticky=NSEW)
 vbar.grid(row=0, column=1, sticky=NS)

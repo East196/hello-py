@@ -26,7 +26,7 @@ def get_page_num(blog):
     if not page_as:
         return 1
     page_num = page_as[-1].get("data-ci-pagination-page")
-    print("page_num:", page_num)
+    print(("page_num:", page_num))
     return page_num
 
 
@@ -42,7 +42,7 @@ def get_article_ids(blog):
             soup = BeautifulSoup(resp.text, "lxml")
             article_as = soup.select("li.blog-unit a")
             article_ids += [article_a.get("href").split("details/")[1] for article_a in article_as]
-            print(len(article_ids), article_ids)
+            print((len(article_ids), article_ids))
     except:
         pass
 
@@ -64,7 +64,7 @@ def get_proxy(page=10):
             time.sleep(12)
     except:
         pass
-    print(u"爬取%s代理IP" % len(proxies))
+    print(("爬取%s代理IP" % len(proxies)))
     return proxies
 
 
@@ -84,11 +84,11 @@ def is_useful(ip):
     try:
         resp = requests.get("http://ip.chinaz.com/", headers=req_headers, timeout=TIME_OUT, proxies=ip2proxy(ip))
         html = BeautifulSoup(resp.text, 'lxml')
-        print(html.select_one(".getlist"))
-        print(u"%s有效" % ip)
+        print((html.select_one(".getlist")))
+        print(("%s有效" % ip))
         return True
     except:
-        print(u"%s无效" % ip)
+        print(("%s无效" % ip))
         return False
 
 
@@ -117,5 +117,5 @@ if __name__ == '__main__':
             print("error")
 
         s = random.randint(12, 60)
-        print("sleep: {}s".format(s))
+        print(("sleep: {}s".format(s)))
         time.sleep(s)

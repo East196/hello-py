@@ -44,5 +44,5 @@ for t in range(4):
 # 模糊:
 image = image.filter(ImageFilter.BLUR)
 image.save('code.jpg', 'jpeg')
-print(image.format, image.size, image.mode)
+print((image.format, image.size, image.mode))
 # image.show()

@@ -10,7 +10,7 @@ class Dict(dict):
             if not arg:
                 continue
             elif isinstance(arg, dict):
-                for key, val in arg.items():
+                for key, val in list(arg.items()):
                     __self[key] = __self._hook(val)
             elif isinstance(arg, tuple) and (not isinstance(arg[0], tuple)):
                 __self[arg[0]] = __self._hook(arg[1])
@@ -18,7 +18,7 @@ class Dict(dict):
                 for key, val in iter(arg):
                     __self[key] = __self._hook(val)
 
-        for key, val in kwargs.items():
+        for key, val in list(kwargs.items()):
             __self[key] = __self._hook(val)
 
     def __setattr__(self, name, value):
@@ -42,7 +42,7 @@ class Dict(dict):
             object.__delattr__(self, '__key')
 
     def __add__(self, other):
-        if not self.keys():
+        if not list(self.keys()):
             return other
         else:
             self_type = type(self).__name__
@@ -71,7 +71,7 @@ class Dict(dict):
 
     def to_dict(self):
         base = {}
-        for key, value in self.items():
+        for key, value in list(self.items()):
             if isinstance(value, type(self)):
                 base[key] = value.to_dict()
             elif isinstance(value, (list, tuple)):
@@ -88,7 +88,7 @@ class Dict(dict):
     def __deepcopy__(self, memo):
         other = self.__class__()
         memo[id(self)] = other
-        for key, value in self.items():
+        for key, value in list(self.items()):
             other[copy.deepcopy(key, memo)] = copy.deepcopy(value, memo)
         return other
 
@@ -99,7 +99,7 @@ class Dict(dict):
                 raise TypeError()
             other.update(args[0])
         other.update(kwargs)
-        for k, v in other.items():
+        for k, v in list(other.items()):
             if ((k not in self)
                 or (not isinstance(self[k], dict))
                 or (not isinstance(v, dict))):

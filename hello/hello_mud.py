@@ -55,7 +55,7 @@ session.commit()
 session.close()
 
 heros = session.query(Hero).all()
-print heros
+print(heros)
 
 # TODO use prettytable print details
 # hello_dataset.py use datasets simple work

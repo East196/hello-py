@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import sys
+import imp
 
-reload(sys)
+imp.reload(sys)
 sys.setdefaultencoding('utf8')
 import os
 from flask import Flask, render_template, request, current_app
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP, PKCS1_v1_5
 import base64
-import urlparse
+import urllib.parse
 
 # 获取当前路径
 curr_dir = os.path.dirname(os.path.realpath(__file__))
@@ -21,7 +22,7 @@ app = Flask(__name__)
 
 def decrypt_data(inputdata, code="123456"):
     # URLDecode
-    data = urlparse.unquote(inputdata)
+    data = urllib.parse.unquote(inputdata)
 
     # base64decode
     data = base64.b64decode(data)

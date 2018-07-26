@@ -16,11 +16,11 @@ cursor.execute('create table user (id varchar(20) primary key, name varchar(20))
 cursor.execute('insert into user (id, name) values (\'1\', \'Michael\')')
 cursor.execute('insert into user (id, name) values (\'2\', \'Jackson\')')
 # 通过rowcount获得插入的行数:
-print cursor.rowcount
+print(cursor.rowcount)
 # 查询:
-print cursor.execute('select * from user').fetchall()
-print cursor.execute('select * from user').fetchmany(size=1)
-print cursor.execute('select * from user').fetchone()
+print(cursor.execute('select * from user').fetchall())
+print(cursor.execute('select * from user').fetchmany(size=1))
+print(cursor.execute('select * from user').fetchone())
 
 
 # 关闭Cursor:

@@ -10,7 +10,7 @@ If you try this script on new data, make sure your corpus
 has at least ~100k characters. ~1M is better.
 '''
 
-from __future__ import print_function
+
 
 import codecs
 

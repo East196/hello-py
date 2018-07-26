@@ -6,7 +6,7 @@ from scipy.misc import imread
 from wordcloud import WordCloud
 
 back_coloring = imread("nlp/mask.jpg")
-wordcloud = WordCloud(font_path=u'nlp/文泉驿微米黑.ttf', background_color="white", mask=back_coloring)
+wordcloud = WordCloud(font_path='nlp/文泉驿微米黑.ttf', background_color="white", mask=back_coloring)
 
 
 def show_wordcloud(data):
@@ -18,7 +18,7 @@ def show_wordcloud(data):
 
 def search_path(o, to):
     path = ""
-    for k, v in o.items():
+    for k, v in list(o.items()):
         if isinstance(v, dict):
             sub = search_path(v, to)
             if sub:
@@ -30,8 +30,8 @@ def search_path(o, to):
 
 
 def leaf_path(o):
-    print o
-    for k, v in o.items():
+    print(o)
+    for k, v in list(o.items()):
         if isinstance(v, dict):
             subs = leaf_path(v)
             for sub_k, sub_v in subs:
@@ -40,7 +40,7 @@ def leaf_path(o):
             yield k, v
 
 
-with codecs.open(u"nlp/name_start.txt", 'r', 'utf-8') as fp:
+with codecs.open("nlp/name_start.txt", 'r', 'utf-8') as fp:
     name_start = fp.readlines()
 name_start = [start.strip() for start in name_start]
 

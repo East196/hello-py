@@ -53,16 +53,16 @@ def p_sub_handle(phandle):
     记事本实例
 """
 notepadHhandle = win32gui.FindWindow("Notepad", None)
-print("%x" % (notepadHhandle))
+print(("%x" % (notepadHhandle)))
 
 editHandle = find_subHandle(notepadHhandle, [("Edit", 0)])
-print("%x" % (editHandle))
+print(("%x" % (editHandle)))
 
 """修改edit中的值"""
 win32api.SendMessage(editHandle, win32con.WM_SETTEXT, 0, "666666")
 
 command_dict = {  # [目录的编号, 打开的窗口名]
-    "open": [3, u"打开"]
+    "open": [3, "打开"]
 }
 
 """操作菜单"""
@@ -72,5 +72,5 @@ cmd_ID = win32gui.GetMenuItemID(menu, command_dict["open"][0])
 if cmd_ID == -1:
     print("没有找到相应的菜单")
 else:
-    print("菜单id:%x" % (cmd_ID))
+    print(("菜单id:%x" % (cmd_ID)))
 win32gui.PostMessage(notepadHhandle, win32con.WM_COMMAND, cmd_ID, 0)

@@ -29,15 +29,15 @@ db = client[db_name]
 
 if __name__ == '__main__':
 
-    print(db.collection_names())
+    print((db.collection_names()))
 
-    print(db.music.count())
-    print(db.aweme.count())
-    print(db.user.count())
-    print(db.challenge.count())
+    print((db.music.count()))
+    print((db.aweme.count()))
+    print((db.user.count()))
+    print((db.challenge.count()))
 
-    print(db.aweme.find_one())
-    print(db.user.find_one())
+    print((db.aweme.find_one()))
+    print((db.user.find_one()))
 
     douyin = DouYin()
 
@@ -48,7 +48,7 @@ if __name__ == '__main__':
 
     # awemes = db.aweme.find({'comment_count': {"$gt": 5000}, 'share_count': {"$gte": 50000}})
     awemes = db.aweme.find({'video_id': {"$exists": True}, 'comment_count': {"$gt": 5000}, 'share_count': {"$gte": 50000}})
-    print(awemes.count())
+    print((awemes.count()))
     awemes = sorted(awemes, key=lambda a: a["share_count"], reverse=True)
     for aweme in awemes[1:50]:
         print(aweme)
