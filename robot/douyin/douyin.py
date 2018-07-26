@@ -29,8 +29,15 @@ db = client[db_name]
 
 if __name__ == '__main__':
 
-    print(db.author.count())
+    print(db.collection_names())
+
+    print(db.music.count())
     print(db.aweme.count())
+    print(db.user.count())
+    print(db.challenge.count())
+
+    print(db.aweme.find_one())
+    print(db.user.find_one())
 
     douyin = DouYin()
 

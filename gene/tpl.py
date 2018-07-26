@@ -1,12 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# init sys to utf-8
-import sys
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
 from tinydb import TinyDB, Query
 
 # init db
@@ -24,11 +18,11 @@ app.startLabelFrame("模版")
 
 
 def edit(btn):
-    print "edit: %s" % btn, app.getListBox(btn)
+    print("edit: %s" % btn, app.getListBox(btn))
     if not app.getListBox(btn): return
     name = app.getListBox(btn)[0]
     tpl = tpls.get(Tpl.name == name)
-    print tpl
+    print(tpl)
     if tpl:
         
         app.setEntry("名称", tpl["name"])
@@ -39,10 +33,6 @@ def edit(btn):
         app.setTextArea("内容", tpl["content"])
         
         
-
-
-
-
 
 
 app.addListBox("模版列表", [tpl["name"] for tpl in tpls.all()])
@@ -59,7 +49,7 @@ app.addScrolledTextArea("内容")
 
 
 def save(btn):
-    print "save: %s" % btn
+    print("save: %s" % btn)
     
     name = app.getEntry("名称")
     
@@ -76,19 +66,19 @@ def save(btn):
         }
 
 
-    print tpl
+    print(tpl)
     tpls.upsert(tpl, Tpl.name == tpl["name"])
     app.updateListBox("模版列表", [tpl["name"] for tpl in tpls.all()])
-    print "show all tpls:"
+    print("show all tpls:")
     for tpl in tpls.all():
-        print tpl
+        print(tpl)
 
 
 app.addButton("保存", save)
 
 
 def clear(btn):
-    print "clear: %s" % btn
+    print("clear: %s" % btn)
     
     app.setEntry("名称", "")
     
@@ -98,12 +88,11 @@ def clear(btn):
     
     
 
-
 app.addButton("清除", clear)
 
 
 def delete(btn):
-    print "delete: %s" % btn
+    print("delete: %s" % btn)
     tpl = tpls.get(Tpl.name == app.getEntry("名称"))
     if tpl:
         tpls.remove(doc_ids=[tpl.doc_id])
@@ -114,4 +103,5 @@ app.addButton("删除", delete)
 
 app.stopLabelFrame()
 app.go()
+
 

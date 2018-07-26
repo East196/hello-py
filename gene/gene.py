@@ -1,16 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# pip install pyyaml flask tinydb appJar
 
-# init sys to utf-8
 import os
-import sys
 
 import yaml
 from jinja2 import Template
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
 from tinydb import TinyDB, Query
 
 # init db
@@ -35,10 +30,10 @@ app.setSticky("nwe")
 
 
 def model_change(f):
-    print f, app.getOptionBox("model")
+    print(f, app.getOptionBox("model"))
     model_name = app.getOptionBox("model")
     model = models.get(Model.name == model_name)
-    print model
+    print(model)
     if model:
         app.setEntry("model_name", model["name"])
         app.clearTextArea("model_content")
@@ -52,7 +47,7 @@ app.addScrolledTextArea("model_content")
 app.setTextAreaHeight("model_content", 30)
 model_names = [model["name"] for model in models.all()]
 if model_names:
-    print "change model_names"
+    print("change model_names")
     app.changeOptionBox("model", model_names, len(model_names) - 1, True)
     app.setOptionBox("model", len(model_names) - 1)
 
@@ -63,10 +58,10 @@ app.setSticky("nwe")
 
 
 def tpl_change(f):
-    print f, app.getOptionBox("tpl")
+    print(f, app.getOptionBox("tpl"))
     tpl_name = app.getOptionBox("tpl")
     tpl = tpls.get(Model.name == tpl_name)
-    print tpl
+    print(tpl)
     if tpl:
         app.setEntry("tpl_name", tpl["name"])
         app.clearTextArea("tpl_content")
@@ -80,7 +75,7 @@ app.addScrolledTextArea("tpl_content")
 app.setTextAreaHeight("tpl_content", 30)
 tpl_names = [tpl["name"] for tpl in tpls.all()]
 if tpl_names:
-    print "change tpl_names"
+    print("change tpl_names")
     app.changeOptionBox("tpl", tpl_names, len(tpl_names) - 1, True)
     app.setOptionBox("tpl", len(tpl_names) - 1)
 
@@ -112,21 +107,21 @@ if not app.getEntry("数据库"):
 
 
 def gene_it(f):
-    print f
+    print(f)
     model_name = app.getEntry("model_name")
     model_content = app.getTextArea("model_content")
     models.upsert({"name": model_name, "content": model_content}, Model.name == model_name)
     model = yaml.load(model_content)
-    print model
+    print(model)
 
     tpl_name = app.getEntry("tpl_name")
     tpl_content = app.getTextArea("tpl_content")
     tpls.upsert({"name": tpl_name, "content": tpl_content}, Tpl.name == tpl_name)
-    print tpl_content
+    print(tpl_content)
 
     model.update({"database": app.getEntry("数据库")})
     result = Template(tpl_content).render(**model)
-    print result
+    print(result)
     app.clearTextArea("result")
     app.setTextArea("result", result)
     path = app.getEntry("路径")
@@ -135,7 +130,7 @@ def gene_it(f):
     configs.update({"value": path}, Config.name == "path")
     database = app.getEntry("数据库")
     configs.update({"value": database}, Config.name == "database")
-    with open("%s/%s.py" % (path, model["name"]), "w") as fp:
+    with open("%s/%s.py" % (path, model["name"]), "w",encoding="utf-8") as fp:
         fp.write(result)
 
 # TODO 考虑装插件直接使用 yaml和 jinja2 文件
