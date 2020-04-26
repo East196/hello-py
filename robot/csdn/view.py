@@ -7,12 +7,13 @@ import random
 from selenium import webdriver
 import time
 
-from fastlist import get_article_ids
+from robot.csdn.fastlist import get_article_ids
 
 
 def view(browser, blog):
     browser.maximize_window()
     browser.get(blog)
+    print("ok")
     time.sleep(5)
 
     for html in articles[29:]:
@@ -27,7 +28,10 @@ def view(browser, blog):
 
 blog = "http://blog.csdn.net/east196"  # "https://blog.csdn.net/q809198545",
 articles = ['{}/article/list/{}'.format(blog, article_id) for article_id in get_article_ids(blog)]
-browser = webdriver.PhantomJS()
+print(articles)
+options = webdriver.FirefoxOptions()
+# options.headless = True
+browser = webdriver.Firefox(options=options)
 while True:
     view(browser, blog)
 
