@@ -1,16 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
 import random
-import sys
-
 import time
-import imp
 
-imp.reload(sys)
-sys.setdefaultencoding('utf-8')
 import requests
 from bs4 import BeautifulSoup
-import os
 
 
 class mzitu():
@@ -20,7 +15,7 @@ class mzitu():
     def all_url(self, url):
         html = self.request(url)  ##调用request函数把套图地址传进去会返回给我们一个response
         all_a = BeautifulSoup(html.text, 'lxml').find('div', class_='all').find_all('a')
-        for a in all_a:
+        for a in all_a[1:]:
             title = a.get_text()
             print(('开始保存：', title))  ##加点提示不然太枯燥了
             path = title.replace("?", '_').replace(":", '_')  ##我注意到有个标题带有 ？  这个符号Windows系统是不能创建文件夹的所以要替换掉
@@ -79,9 +74,11 @@ if __name__ == '__main__':
         try:
             Mzitu = mzitu()  ##实例化
             Mzitu.all_url('http://www.mzitu.com/all')  ##给函数all_url传入参数  你可以当作启动爬虫（就是入口）
-        except:
+        except Exception as e:
+            print(e)
             print("sleep hahaha and restart")
             # TODO 根据异常状态调整3处的sleep
+            # TODO 修正只要异常就重爬的不合理行为
             time.sleep(random.randrange(50, 500) / 100.0)
             crawl()
     crawl()

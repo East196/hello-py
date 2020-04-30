@@ -1,5 +1,5 @@
 # hello-py
-
+> 能够封装函数就封装函数，不要只顾着自嗨
 ## start python
 
 [my ipynb](https://nbviewer.jupyter.org/github/East196/hello-py/blob/master/hello_py.ipynb)
@@ -1121,4 +1121,4 @@ flask-debugtoolbar,flask调试工具。
 作者：是程序员吖
 链接：https://www.jianshu.com/p/d25a9169fe86
 来源：简书
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 

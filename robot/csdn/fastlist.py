@@ -114,6 +114,7 @@ if __name__ == '__main__':
             requests.get(article_link, timeout=TIME_OUT, headers=req_headers)
             print(article_link)
         except:
+
             print("error")
 
         s = random.randint(12, 60)

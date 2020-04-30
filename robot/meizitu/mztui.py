@@ -1,12 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import sys
 
-from images2gif import writeGif
-import imp
-
-imp.reload(sys)
-sys.setdefaultencoding('utf-8')
 
 import os
 
@@ -51,6 +45,7 @@ def start():
 
     app.addImage("clickme", pics[0])
     app.go()
+
 
 def to_gif():
     from PIL import Image
