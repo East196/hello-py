@@ -1,22 +1,30 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from .fastlist import *
+from random import random
+
+import requests
+
+from robot.csdn.fastlist import *
 
 
 def auto_click(articles, proxies=[]):
     if not articles:
         return
     for ip in proxies:
-        if not is_useful(ip):
+        useful = is_useful(ip)
+        print(ip, useful)
+        if not useful:
             continue
-        for _ in range(40):
+        for _ in range(len(articles)):
             article_link = random.choice(articles)
+            print(ip, article_link)
             try:
-                requests.get(protoarticle(article_link), timeout=TIME_OUT, headers=req_headers, proxies=ip2proxy(ip))
+                requests.get(protoarticle(ip, article_link), timeout=TIME_OUT, headers=req_headers,
+                             proxies=ip2proxy(ip))
                 print((article_link, "ok"))
                 time.sleep(0.25)
-            except:
-                print((article_link, "fail"))
+            except Exception as e:
+                print((article_link, "fail", e))
                 time.sleep(0.1)
                 break
 
@@ -24,9 +32,8 @@ def auto_click(articles, proxies=[]):
 if __name__ == '__main__':
     # blogs = ["https://blog.csdn.net/east196", "https://blog.csdn.net/q809198545"]
     blog = "https://blog.csdn.net/east196"
-    articles = ['{}/article/list/{}'.format(blog, article_id) for article_id in get_article_ids(blog)]
+    articles = ['{}/article/details/{}'.format(blog, article_id) for article_id in get_article_ids(blog)]
+    print("articles:", articles)
+    proxies = get_proxy(page=1)
     while True:
-        proxies = get_proxy(page=1)
-        # useful_ips = get_useful_ips(proxies)
-        # print(useful_ips)
         auto_click(articles, proxies)

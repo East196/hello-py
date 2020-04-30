@@ -15,7 +15,7 @@ req_headers = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36'
 }
 
-TIME_OUT = 15
+TIME_OUT = 30
 
 
 def get_page_num(blog):
@@ -40,8 +40,13 @@ def get_article_ids(blog):
             print(url)
             resp = requests.get(url, timeout=TIME_OUT, headers=req_headers)
             soup = BeautifulSoup(resp.text, "lxml")
-            article_as = soup.select("li.blog-unit a")
-            article_ids += [article_a.get("href").split("details/")[1] for article_a in article_as]
+            articles = soup.select(".article-item-box")
+            for article in articles:
+                article_id = article.select_one("h4 a").get("href").split("details/")[1]
+                article_read_num = article.select_one(".read-num").text
+                print(article_id, article_read_num)
+                if int(article_read_num) < 10000:
+                    article_ids.append(article_id)
             print((len(article_ids), article_ids))
     except:
         pass
@@ -76,7 +81,7 @@ def ip2proxy(ip):
 
 def protoarticle(ip, article):
     proto = "https" if ip.startswith("https") else "http"
-    article = article.replace("http", proto)
+    # article = article.replace("http", proto)
     return article
 
 
@@ -85,13 +90,14 @@ def is_useful(ip):
         resp = requests.get("http://ip.chinaz.com/", headers=req_headers, timeout=TIME_OUT, proxies=ip2proxy(ip))
         html = BeautifulSoup(resp.text, 'lxml')
         print((html.select_one(".getlist")))
-        print(("%s有效" % ip))
+        # print(("代理 %s 有效" % ip))
         return True
     except:
-        print(("%s无效" % ip))
+        # print(("代理 %s 无效" % ip))
         return False
 
 
+# 无返回，暂不可用
 def get_useful_ips(ips, batch=10):
     all_jobs = [gevent.spawn(is_useful, ip) for ip in ips]
 
@@ -114,7 +120,6 @@ if __name__ == '__main__':
             requests.get(article_link, timeout=TIME_OUT, headers=req_headers)
             print(article_link)
         except:
-
             print("error")
 
         s = random.randint(12, 60)
