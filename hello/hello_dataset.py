@@ -6,6 +6,8 @@ import dataset
 
 from hello import logger
 
+
+# https://dataset.readthedocs.io/en/latest/index.html
 db = dataset.connect('sqlite:///hello.db')
 print(db.tables)
 print(db['city'].columns)
